@@ -36,8 +36,10 @@ gem 'launchy'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.2.1'
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
