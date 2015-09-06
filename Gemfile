@@ -18,6 +18,13 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'haml'
 gem 'haml-rails'
 
+# sensitive data
+gem 'figaro'
+
+# oauth login
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -40,6 +47,11 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'shoulda'
+  gem 'pry'
+end
+
+group :test do
+  gem 'capybara'
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
