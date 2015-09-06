@@ -20,6 +20,18 @@ require 'rspec/rails'
 #
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
+# Omniauth configuration
+
+OmniAuth.config.test_mode = true
+omniauth_hash = { 'provider' => 'google',
+                  'uid' => '12345',
+                  'info' => {
+                      'name' => 'natasha',
+                      'email' => 'hi@natashatherobot.com' }
+                }
+
+OmniAuth.config.add_mock(:google_oauth2, omniauth_hash)
+
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.maintain_test_schema!
