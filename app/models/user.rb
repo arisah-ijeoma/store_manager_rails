@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  devise :omniauthable, :omniauth_providers => [:google_oauth2]
+  devise :omniauthable, :omniauth_providers => [:google_oauth2, :facebook]
 
   has_many :items, through: :user_items
   has_many :user_items
