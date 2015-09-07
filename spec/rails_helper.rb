@@ -31,6 +31,7 @@ omniauth_hash = { 'provider' => 'google',
                 }
 
 OmniAuth.config.add_mock(:google_oauth2, omniauth_hash)
+OmniAuth.config.add_mock(:facebook, omniauth_hash)
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
