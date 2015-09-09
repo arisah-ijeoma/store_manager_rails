@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :items, through: :user_items
   has_many :user_items
+  belongs_to :admin_user
 
   def self.from_omniauth(access_token)
     data = access_token.info
