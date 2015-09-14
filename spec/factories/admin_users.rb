@@ -6,10 +6,10 @@ FactoryGirl.define do
     role 'regular'
   end
 
-  factory :super_admin_user do
+  factory :super_admin_user, class: 'AdminUser' do
     email { Faker::Internet.email }
-    password 'password'
-    password_confirmation 'password'
+    password 'superpass'
+    password_confirmation 'superpass'
     role 'super'
   end
 end
