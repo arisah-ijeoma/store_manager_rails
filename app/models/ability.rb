@@ -9,7 +9,7 @@ class Ability
         can :manage, Item
       end
     else
-      can [:update, :destroy], Item
+      can [:update, :read], Item
     end
   end
 end
