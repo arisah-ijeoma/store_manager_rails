@@ -6,8 +6,6 @@ class User < ActiveRecord::Base
 
   devise :omniauthable, :omniauth_providers => [:google_oauth2, :facebook]
 
-  has_many :items, through: :user_items
-  has_many :user_items
   belongs_to :admin_user
 
   def self.from_omniauth(access_token)

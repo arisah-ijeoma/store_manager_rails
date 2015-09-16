@@ -5,6 +5,8 @@ class AdminUser < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :users, dependent: :destroy
+  has_many :items, through: :admin_user_items
+  has_many :admin_user_items
 
 
   ROLES = %w(super regular) unless defined? ROLES

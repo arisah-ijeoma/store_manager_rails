@@ -2,8 +2,7 @@ require 'rails_helper'
 
 describe User do
   context "associations" do
-    it {is_expected.to have_many :items}
-    it {is_expected.to have_many :user_items}
+    it {is_expected.to belong_to :admin_user}
   end
 
   describe "valid user" do
