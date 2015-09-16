@@ -35,5 +35,8 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
+  # Raises error for missing strong parameters
+  config.action_controller.action_on_unpermitted_parameters = :raise
+
   config.action_mailer.default_url_options = { host: 'localhost', port: 3333 }
 end
