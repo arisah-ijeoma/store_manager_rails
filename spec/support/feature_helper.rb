@@ -1,6 +1,4 @@
-include Warden::Test::Helpers
-
-module FeaturesHelpers
+module FeatureHelper
   def login(user = create(:user))
     login_as user, scope: :user
     user

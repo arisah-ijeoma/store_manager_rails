@@ -1,11 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :admin_users
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :admin_users, controllers: { sessions: "admin/sessions" }
+  devise_for :users, controllers: { sessions: 'sessions', omniauth_callbacks: "omniauth_callbacks" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+  # constraints(AdminSubdomain) do
+  namespace :admin do
+    root 'items#index'
+  end
+  # end
+
   root 'items#index'
+  # get '/admin', to: redirect(subdomain: StoreManagerRails::Application.config.admin_subdomain, path: '/')
   resources :items
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

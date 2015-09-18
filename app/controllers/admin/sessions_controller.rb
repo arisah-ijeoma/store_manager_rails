@@ -1,4 +1,4 @@
-class SessionsController < Devise::SessionsController
+class Admin::SessionsController < Devise::SessionsController
 # before_filter :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -14,6 +14,14 @@ class SessionsController < Devise::SessionsController
   # DELETE /resource/sign_out
   def destroy
     super
+  end
+
+  def after_sign_in_path_for(resource)
+    admin_root_path
+  end
+
+  def after_sign_out_path_for(resource)
+    new_admin_user_session_path
   end
 
   # protected
