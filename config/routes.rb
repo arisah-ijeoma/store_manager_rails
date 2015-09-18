@@ -5,14 +5,12 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # constraints(AdminSubdomain) do
   namespace :admin do
     root 'items#index'
+    resources :items
   end
-  # end
 
   root 'items#index'
-  # get '/admin', to: redirect(subdomain: StoreManagerRails::Application.config.admin_subdomain, path: '/')
   resources :items
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
