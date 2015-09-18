@@ -1,0 +1,12 @@
+- if @item.new_record?
+  New Item
+- else
+  Edit Item
+
+= semantic_form_for @item do |f|
+  = f.inputs do
+    = f.input :category, as: :select, include_blank: 'Please Select'
+    = f.input :name, placeholder: 'The name of the item'
+    = f.input :quantity, as: :number, placeholder: 'The quantity of the item'
+    = f.input :min_quantity, as: :number, placeholder: 'The minimum quantity of the item before restock'
+    = f.action :submit, :label => 'Save', :button_html => {data: {disable_with: 'Please wait...'}}
