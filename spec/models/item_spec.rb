@@ -12,4 +12,22 @@ describe Item do
       expect(item.category).to eq("Music")
     end
   end
+
+  context "invalid item" do
+    describe "minimum quantity larger than quantity" do
+      it "raises an error" do
+        expect{
+          create(:invalid_item)
+        }.to raise_error("Validation failed: Min qty should be less than quantity added")
+      end
+    end
+
+    describe  "invalid characters" do
+      it "raises an error" do
+        expect{
+          create(:invalid_item_value)
+        }.to raise_error("Validation failed: Quantity is not a number")
+      end
+    end
+  end
 end
