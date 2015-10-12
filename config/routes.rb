@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     root 'items#index'
     resources :items do
       get :sell, on: :member
+      post :update_sale, on: :member
     end
   end
 

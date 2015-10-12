@@ -19,10 +19,27 @@ module Admin
       end
     end
 
+    def sell
+      @item = Item.find(params[:id])
+    end
+
     def edit
     end
 
     def show
+    end
+
+    def update_sale
+      @item = Item.find(params[:id])
+      @item.quantity = @item.quantity - (params[:item][:quantity_sold]).to_i
+
+      if @item.save
+        redirect_to admin_items_path,
+        notice: "You just sold #{params[:item][:quantity_sold]} piece(s) of #{@item.name}"
+      else
+        redirect_to sell_admin_item_path,
+        notice: "Quantity sold should be less than the available stock"
+      end
     end
 
     def update
