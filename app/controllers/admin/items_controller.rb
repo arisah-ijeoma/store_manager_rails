@@ -34,7 +34,7 @@ module Admin
     private
 
     def item_params
-      params.require(:item).permit(:category, :name, :quantity, :min_qty)
+      params.require(:item).permit(:category, :name, :quantity, :min_qty, :quantity_sold)
     end
   end
 end

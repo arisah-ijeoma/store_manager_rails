@@ -1,0 +1,10 @@
+%div
+  = "Category: #{@item.category}"
+  = "Item Name: #{@item.name}"
+  = "Quantity Remaining: #{@item.quantity}"
+  = semantic_form_for [:admin, @item] do |f|
+    = f.inputs do
+      = f.input :quantity_sold, as: :number
+      = f.action :submit, :label => 'Save', :button_html => {data: {disable_with: 'Please wait...'}}
+
+= link_to 'Back to Items List', admin_items_path

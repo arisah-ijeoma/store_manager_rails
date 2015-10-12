@@ -15,6 +15,6 @@ class SessionsController < Devise::SessionsController
   end
   
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:user) { |u| u.permit(:email, :password) }
+    devise_parameter_sanitizer.for(:user) { |u| u.permit(:email, :password, :name) }
   end
 end
