@@ -26,7 +26,19 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+  def render_error_page(exception = nil)
+    if exception
+      logger.info "Rendering #{status_code}: #{exception.message}"
+    end
+
+    render file: "errors/#{status_code}.html", :status => status_code, :layout => false
+  end
+
   protected
+
+  def status_code
+    params[:code] || 500
+  end
 
   def initialize_omniauth_state
     session['omniauth.state'] = response.headers['X-CSRF-Token'] = form_authenticity_token

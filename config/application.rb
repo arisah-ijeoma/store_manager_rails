@@ -31,9 +31,9 @@ module StoreManagerRails
     config.generators do |g|
       g.template_engine :haml
       g.test_framework  :rspec, views: false
-      # you can also specify a different test framework or ORM here
-      #
-      # g.orm             :mongoid
     end
+
+    config.exceptions_app = self.routes
+
   end
 end

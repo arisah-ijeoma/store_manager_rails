@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       get :sell, on: :member
       post :update_sale, on: :member
     end
+
+    get '*a' => 'errors#show'
   end
 
   root 'items#index'
@@ -15,4 +17,6 @@ Rails.application.routes.draw do
     get :sell, on: :member
     post :update_sale, on: :member
   end
+
+  get '*a' => 'errors#show'
 end

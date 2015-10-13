@@ -1,0 +1,7 @@
+%h1 The page you were looking for doesn't exist.
+%p You may have mistyped the address or the page may have moved.
+%p If you are the application owner check the logs for more information.</p>
+- if current_user
+  = link_to 'Return to app', root_path
+- else
+  = link_to 'Return to app', admin_root_path

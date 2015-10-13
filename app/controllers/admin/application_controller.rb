@@ -23,7 +23,19 @@ module Admin
       @current_ability ||= Ability.new(current_admin_user)
     end
 
+    def render_admin_error_page(exception = nil)
+      if exception
+        logger.info "Rendering #{status_code}: #{exception.message}"
+      end
+
+      render file: "errors/#{status_code}.html", :status => status_code, :layout => false
+    end
+
     protected
+
+    def status_code
+      params[:code] || 500
+    end
 
     def authenticate_admin_user!
       if current_user
