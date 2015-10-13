@@ -1,5 +1,5 @@
 class Admin::SessionsController < Devise::SessionsController
-  # before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_filter :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource)
     admin_root_path
@@ -16,7 +16,7 @@ class Admin::SessionsController < Devise::SessionsController
     devise_parameter_sanitizer.for(:sign_in) << :attribute
   end
 
-  # def configure_permitted_parameters
-  #   devise_parameter_sanitizer.for(:user) { |u| u.permit(:email, :password, :name) }
-  # end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:user) { |u| u.permit(:email, :password, :name) }
+  end
 end
