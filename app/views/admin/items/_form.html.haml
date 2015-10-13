@@ -10,3 +10,5 @@
     = f.input :quantity, as: :number, placeholder: 'The quantity of the item'
     = f.input :min_qty, label: "Minimum Quantity", as: :number, placeholder: 'The minimum quantity of the item before restock'
     = f.action :submit, :label => 'Save', :button_html => {data: {disable_with: 'Please wait...'}}
+
+= link_to 'Back to Items List', admin_items_path

@@ -9,7 +9,7 @@ class Ability
         can :manage, Item
       end
     else
-      can [:update, :read], Item
+      can [:sell, :read], Item
     end
   end
 end
