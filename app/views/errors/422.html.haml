@@ -1,0 +1,7 @@
+%h1 The change you wanted was rejected.</h1>
+%p Maybe you tried to change something you didn't have access to.</p>
+%p If you are the application owner check the logs for more information.</p>
+- if current_user
+  = link_to 'Return to app', root_path
+- else
+  = link_to 'Return to app', admin_root_path

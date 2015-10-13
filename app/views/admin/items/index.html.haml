@@ -1,0 +1,11 @@
+= link_to 'Create a new Item', new_admin_item_path
+%table.table.table-striped
+  %thead
+    %tr
+      %th Category
+      %th Name
+      %th Quantity of Items Remaining
+      %th Minimum Quantity
+      %th
+  %tbody
+    = render @items

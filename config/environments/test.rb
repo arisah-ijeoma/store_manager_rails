@@ -34,6 +34,9 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  # Raises error for missing strong parameters
+  config.action_controller.action_on_unpermitted_parameters = :raise
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

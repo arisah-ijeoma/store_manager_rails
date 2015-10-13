@@ -14,17 +14,23 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
-# template
+# Template
 gem 'haml'
 gem 'haml-rails'
 
-# sensitive data
+# Sensitive data
 gem 'figaro'
 
-# oauth login
+# Oauth login
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
+
+# Form builder
+gem 'formtastic', '~> 3.0'
+
+# For user authentication
+gem 'cancan'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -39,7 +45,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
-# start and stop postgre
+# Start and stop postgre
 gem 'launchy'
 
 group :development, :test do
@@ -49,10 +55,14 @@ group :development, :test do
   gem 'faker'
   gem 'shoulda'
   gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-nav'
 end
 
 group :test do
   gem 'capybara'
+  gem 'byebug'
+  gem 'database_cleaner'
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -65,4 +75,3 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
