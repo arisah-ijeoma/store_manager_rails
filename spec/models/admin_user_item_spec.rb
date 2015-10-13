@@ -11,7 +11,7 @@ describe AdminUserItem do
 
   context "AdminUser" do
     it "has many items" do
-      item_1 = create(:item)
+      item_1 = create(:item, name: 'Recorder')
 
       admin_user.items <<  [item, item_1]
 
