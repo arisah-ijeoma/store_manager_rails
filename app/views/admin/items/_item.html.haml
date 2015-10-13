@@ -6,3 +6,4 @@
   %td
     = link_to 'Sell', sell_admin_item_path(item)
     = link_to 'Edit', edit_admin_item_path(item)
+    = link_to 'Delete', [:admin, item], method: :delete, data: { confirm: 'Are you sure?' }

@@ -45,6 +45,12 @@ describe "Admin Item Actions", type: :feature do
     expect(page).to have_content("'Cassette' has been successfully updated")
   end
 
+  scenario "admin can delete item" do
+    click_on 'Delete'
+    expect(page).not_to have_content("Music")
+    expect(page).to have_content("This item has been successfully deleted")
+  end
+
   def when_i_fill_in_item_details
     select 'Games', from: 'Category'
     fill_in 'Name', with: 'Mortal Kombat X'

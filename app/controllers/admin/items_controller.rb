@@ -1,6 +1,8 @@
 module Admin
   class ItemsController < Admin::ApplicationController
 
+    before_action :find_item, except: [:index, :new, :create]
+
     def index
       @items = Item.all
     end
@@ -20,11 +22,9 @@ module Admin
     end
 
     def sell
-      @item = Item.find(params[:id])
     end
 
     def update_sale
-      @item = Item.find(params[:id])
       @item.quantity = @item.quantity - (params[:item][:quantity_sold]).to_i
 
       if @item.save
@@ -36,16 +36,10 @@ module Admin
       end
     end
 
-    def show
-    end
-
     def edit
-      @item = Item.find(params[:id])
     end
 
     def update
-      @item = Item.find(params[:id])
-
       if @item.update_attributes(item_params)
         redirect_to admin_items_path,
         notice: "'#{params[:item][:name]}' has been successfully updated"
@@ -55,12 +49,19 @@ module Admin
     end
 
     def destroy
+      @item.destroy
+      redirect_to admin_items_path,
+      notice: "This item has been successfully deleted"
     end
 
     private
 
     def item_params
       params.require(:item).permit(:category, :name, :quantity, :min_qty, :quantity_sold)
+    end
+
+    def find_item
+      @item = Item.find(params[:id])
     end
   end
 end

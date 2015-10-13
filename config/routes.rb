@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'items#index'
-    resources :items do
+    resources :items, except: [:show] do
       get :sell, on: :member
       post :update_sale, on: :member
     end
