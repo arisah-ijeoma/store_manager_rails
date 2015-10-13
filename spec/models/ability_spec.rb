@@ -28,7 +28,7 @@ describe Ability do
       let(:ability) { Ability.new(user) }
 
       it "should be able to update items" do
-        expect(ability.can?(:update, Item)).to be true
+        expect(ability.can?(:sell, Item)).to be true
       end
       it "should be able to read items" do
         expect(ability.can?(:read, Item)).to be true

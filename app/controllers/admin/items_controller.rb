@@ -44,6 +44,14 @@ module Admin
     end
 
     def update
+      @item = Item.find(params[:id])
+
+      if @item.update_attributes(item_params)
+        redirect_to admin_items_path,
+        notice: "'#{params[:item][:name]}' has been successfully updated"
+      else
+        render :edit
+      end
     end
 
     def destroy

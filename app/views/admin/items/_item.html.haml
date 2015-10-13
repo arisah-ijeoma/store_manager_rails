@@ -2,6 +2,7 @@
   %td= item.category
   %td= item.name
   %td= item.quantity
+  %td= item.min_qty
   %td
     = link_to 'Sell', sell_admin_item_path(item)
     = link_to 'Edit', edit_admin_item_path(item)
