@@ -8,6 +8,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
+require 'autoprefixer-rails'
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -36,6 +37,5 @@ module StoreManagerRails
     config.exceptions_app = self.routes
 
     Rails.application.config.assets.precompile += %w( devise.css )
-
   end
 end
