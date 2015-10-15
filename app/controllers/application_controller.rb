@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  layout :layout_by_resource
 
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_path, alert: exception.message
@@ -35,6 +36,14 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def layout_by_resource
+    if devise_controller?
+      "devise"
+    else
+      "application"
+    end
+  end
 
   def status_code
     params[:code] || 500

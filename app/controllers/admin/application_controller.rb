@@ -1,6 +1,6 @@
 module Admin
   class ApplicationController < ActionController::Base
-    layout 'admin'
+    layout :layout_by_resource_admin
 
     before_action :authenticate_admin_user!
     protect_from_forgery
@@ -32,6 +32,14 @@ module Admin
     end
 
     protected
+
+    def layout_by_resource_admin
+      if devise_controller?
+        "devise"
+      else
+        "admin"
+      end
+    end
 
     def status_code
       params[:code] || 500

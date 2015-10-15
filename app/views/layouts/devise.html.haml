@@ -1,0 +1,16 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title StoreManagerRails
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'devise', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body.devise-body{class: "sm-#{rand(1..6)}"}
+    .container
+      .row
+        .log-box.col.s12.col.m7{style: "padding: 20px"}
+          = render 'devise/shared/errors'
+          = yield
+          = render 'layouts/footer'
