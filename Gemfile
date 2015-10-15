@@ -51,6 +51,7 @@ gem 'launchy'
 
 # For styling
 gem 'materialize-sass'
+gem "autoprefixer-rails"
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.2.1'

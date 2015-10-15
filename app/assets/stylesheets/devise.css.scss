@@ -1,8 +1,5 @@
 @mixin devise-bg($img) {
   background: url("sm-#{$img}.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
   background-size: cover;
 }
 
@@ -18,4 +15,36 @@ html {
 
 .log-box {
   background-color: #fff;
+  opacity: 0.9;
+  border-radius: 20px;
+  width: 50%;
+  border: 2px solid #a00;
+  box-shadow: 0 0 30px #a00;
+  text-align: center;
+
+  // centralizing
+  right:50%;
+  bottom: 50%;
+  position: absolute;
+  transform: translate(50%, 50%);
 }
+
+
+/*********************************
+        MEDIA QUERIES
+*********************************/
+
+@media screen and (max-width: 600px) {
+  .log-box {
+    height: 100%;
+    right: 0;
+    bottom: 0;
+    border-radius: 0;
+    border: none;
+    display: flex;
+    justify-content:center;
+    flex-direction:column;
+    transform: none;
+  }
+}
+
