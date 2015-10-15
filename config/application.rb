@@ -37,5 +37,7 @@ module StoreManagerRails
     config.exceptions_app = self.routes
 
     Rails.application.config.assets.precompile += %w( devise.css )
+
+    config.serve_static_assets = true
   end
 end
