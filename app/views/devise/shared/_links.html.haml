@@ -17,9 +17,9 @@
   - resource_class.omniauth_providers.each do |provider|
     = link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider)
     %br/
-- if current_page?(new_user_session_path)
-  = link_to "Log in as Admin", new_admin_user_session_path
-  %br/
-- if current_page?(new_admin_user_session_path)
+- if controller_name == 'sessions' && controller.class.name.split("::").first== "Admin"
   = link_to "Log in as User", new_user_session_path
+  %br/
+- if controller_name == 'sessions' && controller.class.name.split("::").first!= "Admin"
+  = link_to "Log in as Admin", new_admin_user_session_path
   %br/
