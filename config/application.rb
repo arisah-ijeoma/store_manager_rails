@@ -38,6 +38,6 @@ module StoreManagerRails
 
     Rails.application.config.assets.precompile += %w( devise.css )
 
-    config.serve_static_assets = true
+    config.serve_static_files = true
   end
 end
