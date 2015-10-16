@@ -1,26 +1,40 @@
 require 'rails_helper'
 
 describe "Devise", type: :feature do
-  scenario "admin user log in page" do
-    visit new_admin_user_session_path
-    expect(page).to have_content('Log in as User')
+  context "user" do
+    scenario "user log in page" do
+      visit new_user_session_path
+      expect(page).to have_content('Log in as Admin')
+    end
+
+    scenario "user login error sill shows admin option" do
+      visit new_user_session_path
+      fill_details
+      expect(page).to have_content('Log in as Admin')
+    end
+
+    scenario "oauth doesn't show on sign up" do
+      visit new_user_registration_path
+      expect(page).not_to have_content('Sign in with')
+    end
   end
 
-  scenario "user log in page" do
-    visit new_user_session_path
-    expect(page).to have_content('Log in as Admin')
-  end
+  context "admin" do
+    scenario "admin user log in page" do
+      visit new_admin_user_session_path
+      expect(page).to have_content('Log in as User')
+    end
 
-  scenario "admin login error sill shows user option" do
-    visit new_admin_user_session_path
-    fill_details
-    expect(page).to have_content('Log in as User')
-  end
+    scenario "admin login error sill shows user option" do
+      visit new_admin_user_session_path
+      fill_details
+      expect(page).to have_content('Log in as User')
+    end
 
-  scenario "user login error sill shows admin option" do
-    visit new_user_session_path
-    fill_details
-    expect(page).to have_content('Log in as Admin')
+    scenario "oauth doesn't show on sign up" do
+      visit new_admin_user_registration_path
+      expect(page).not_to have_content('Sign in with')
+    end
   end
 
   def fill_details
