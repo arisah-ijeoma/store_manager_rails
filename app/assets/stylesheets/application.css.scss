@@ -12,8 +12,22 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap-material-design
  *= require formtastic
  */
 @import "materialize/components/color";
 $primary-color: color("blue", "lighten-2") !default;
 @import 'materialize';
+
+// overwriting classes for forms
+
+label {
+  &.label {
+    background-color: initial;
+  }
+}
+
+select {
+  width: initial;
+  display: inline-block;
+}

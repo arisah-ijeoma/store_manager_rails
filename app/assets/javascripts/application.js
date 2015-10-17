@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-material-design
 //= require materialize-sprockets
 //= require jquery_ujs
 //= require turbolinks
