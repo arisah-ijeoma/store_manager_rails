@@ -25,11 +25,17 @@ module Admin
     end
 
     def update_sale
-      @item.quantity = @item.quantity - (params[:item][:quantity_sold]).to_i
+      qty_sold = (params[:item][:quantity_sold])
+
+      @item.quantity = @item.quantity - qty_sold.to_i
 
       if @item.save
-        redirect_to admin_items_path,
-        notice: "You just sold #{params[:item][:quantity_sold]} piece(s) of #{@item.name}"
+        if qty_sold.to_i == 0
+          redirect_to admin_items_path, notice: "No sale"
+        else
+          redirect_to admin_items_path,
+          notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"
+        end
       else
         redirect_to sell_admin_item_path,
         notice: "Quantity sold should be less than the available stock"

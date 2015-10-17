@@ -36,6 +36,12 @@ describe "Admin Item Actions", type: :feature do
     expect(page).to have_content("Quantity sold should be less than the available stock")
   end
 
+  scenario "admin can not sell without new sale value" do
+    click_on 'Sell'
+    click_on 'Sold'
+    expect(page).to have_content('No sale')
+  end
+
   scenario "admin can update item" do
     click_on 'Edit'
     select 'Fashion', from: 'Category'
