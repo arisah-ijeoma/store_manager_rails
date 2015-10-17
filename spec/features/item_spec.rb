@@ -29,4 +29,10 @@ describe 'User Item Actions', type: :feature do
     click_on 'Sold'
     expect(page).to have_content("Quantity sold should be less than the available stock")
   end
+
+  scenario "user does not input new sale value" do
+    click_on 'Sell'
+    click_on 'Sold'
+    expect(page).to have_content('No sale')
+  end
 end
