@@ -8,7 +8,6 @@ class AdminUser < ActiveRecord::Base
   has_many :items, through: :admin_user_items
   has_many :admin_user_items
 
-
   ROLES = %w(super regular) unless defined? ROLES
 
 end
