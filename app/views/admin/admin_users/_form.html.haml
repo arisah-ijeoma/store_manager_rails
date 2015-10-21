@@ -8,6 +8,7 @@
     = f.input :email
     = f.input :password
     = f.input :password_confirmation
+    = f.input :establishment
     = f.action :submit, label: 'Save', button_html: {data: {disable_with: 'Please wait...'}}
 
 = link_to 'Back to Admin User List', admin_admin_users_path

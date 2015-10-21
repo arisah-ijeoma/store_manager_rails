@@ -2,6 +2,7 @@
   %td
     = link_to admin_user.email # admin_user PROFILE
   %td= admin_user.role
+  %td= admin_user.establishment
   %td
     = link_to 'Edit', edit_admin_admin_user_path(admin_user)
     = link_to 'Delete', [:admin, admin_user], method: :delete, data: { confirm: 'Are you sure?' }
