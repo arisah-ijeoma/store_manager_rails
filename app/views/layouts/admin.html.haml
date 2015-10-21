@@ -7,8 +7,14 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    .container
-      = render 'devise/shared/errors'
-      = render 'layouts/header'
-      = yield
-      = render 'layouts/footer'
+    .container-fluid{style: "margin: 15px 30px"}
+      .row
+        .col.m12
+          = render 'devise/shared/errors'
+          = render 'layouts/header'
+      .row
+        .col.m3
+          = render "layouts/sidebar"
+        .col.m9
+          = yield
+        = render 'layouts/footer'

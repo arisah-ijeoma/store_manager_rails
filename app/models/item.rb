@@ -32,6 +32,7 @@ class Item < ActiveRecord::Base
   def min_qty_is_less_than_quantity
     unless valid_values?
       errors.add(:min_qty, "should be less than quantity added") if min_qty > quantity
+      errors.add(:min_qty, "should not be 0") if min_qty == 0
     end
   end
 

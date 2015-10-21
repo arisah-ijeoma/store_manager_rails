@@ -57,6 +57,13 @@ describe "Admin Item Actions", type: :feature do
     expect(page).to have_content("This item has been successfully deleted")
   end
 
+  scenario "admin can not set minimum quantity to 0" do
+    click_on 'Edit'
+    fill_in 'Minimum Quantity', with: 0
+    click_on 'Save'
+    expect(page).to have_content('should not be 0')
+  end
+
   def when_i_fill_in_item_details
     select 'Games', from: 'Category'
     fill_in 'Name', with: 'Mortal Kombat X'

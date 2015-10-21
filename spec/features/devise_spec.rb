@@ -31,9 +31,11 @@ describe "Devise", type: :feature do
       expect(page).to have_content('Log in as User')
     end
 
-    scenario "oauth doesn't show on sign up" do
-      visit new_admin_user_registration_path
-      expect(page).not_to have_content('Sign in with')
+    scenario "sign up is no longer accessible" do
+      visit '/admin_users/sign_up'
+      expect(page).to have_content('Log in')
+      expect(page).to have_content('Sign in with Facebook')
+      expect(page).to have_content('Log in as Admin')
     end
   end
 
