@@ -1,7 +1,6 @@
 module Admin
   class ItemsController < Admin::ApplicationController
-
-    before_action :find_item, except: [:index, :new, :create]
+    load_and_authorize_resource class: "Item"
 
     def index
       @items = Item.all
@@ -64,10 +63,6 @@ module Admin
 
     def item_params
       params.require(:item).permit(:category, :name, :quantity, :min_qty, :quantity_sold)
-    end
-
-    def find_item
-      @item = Item.find(params[:id])
     end
   end
 end

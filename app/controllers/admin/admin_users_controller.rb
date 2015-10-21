@@ -1,6 +1,6 @@
 module Admin
   class AdminUsersController < Admin::ApplicationController
-    load_and_authorize_resource class: 'AdminUser'
+    load_and_authorize_resource class: "AdminUser"
 
     def index
       @admin_users = AdminUser.regular_admins
