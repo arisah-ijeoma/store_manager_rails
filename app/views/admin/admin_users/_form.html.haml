@@ -1,0 +1,13 @@
+- if @admin_user.new_record?
+  New Admin User
+- else
+  Edit Admin User
+
+= semantic_form_for [:admin, @admin_user] do |f|
+  = f.inputs do
+    = f.input :email
+    = f.input :password
+    = f.input :password_confirmation
+    = f.action :submit, label: 'Save', button_html: {data: {disable_with: 'Please wait...'}}
+
+= link_to 'Back to Admin User List', admin_admin_users_path

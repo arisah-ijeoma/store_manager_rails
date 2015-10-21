@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get :sell, on: :member
       post :update_sale, on: :member
     end
+    resources :admin_users
 
     get '*a' => 'errors#show'
   end

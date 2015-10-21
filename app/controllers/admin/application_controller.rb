@@ -3,6 +3,14 @@ module Admin
     layout :layout_by_resource_admin
 
     before_action :authenticate_admin_user!
+
+    # a hack till cancancan starts playing well with strong parameters
+    before_action do
+      resource = controller_name.singularize.to_sym
+      method = "#{resource}_params"
+      params[resource] &&= send(method) if respond_to?(method, true)
+    end
+
     protect_from_forgery
 
     rescue_from CanCan::AccessDenied do |exception|

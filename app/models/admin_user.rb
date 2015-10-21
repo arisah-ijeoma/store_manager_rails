@@ -10,4 +10,5 @@ class AdminUser < ActiveRecord::Base
 
   ROLES = %w(super regular) unless defined? ROLES
 
+  scope :regular_admins, -> { where(role: 'regular') }
 end
