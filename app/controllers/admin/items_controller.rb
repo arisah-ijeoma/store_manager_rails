@@ -1,17 +1,19 @@
 module Admin
   class ItemsController < Admin::ApplicationController
+    before_action :get_admin
+
     load_and_authorize_resource class: "Item"
 
     def index
-      @items = Item.all
+      @items = @admin_user.items
     end
 
     def new
-      @item = Item.new
+      @item = @admin_user.items.new
     end
 
     def create
-      @item = Item.create(item_params)
+      @item = @admin_user.items.create(item_params)
 
       if @item.save
         redirect_to admin_items_path, notice: 'Item successfully created'

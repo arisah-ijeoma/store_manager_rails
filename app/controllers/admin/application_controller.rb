@@ -39,6 +39,10 @@ module Admin
       render file: "errors/#{status_code}.html", :status => status_code, :layout => false
     end
 
+    def get_admin
+      @admin_user = current_admin_user
+    end
+
     protected
 
     def layout_by_resource_admin
