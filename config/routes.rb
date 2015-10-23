@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'sessions' }
-  devise_for :admin_users, skip: :registrations , controllers: { sessions: "admin/sessions" }
+  devise_for :admin_users , controllers: { sessions: "admin/sessions" }
 
   namespace :admin do
     root 'items#index'

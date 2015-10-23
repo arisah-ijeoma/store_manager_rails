@@ -12,11 +12,6 @@ describe "Devise", type: :feature do
       fill_details
       expect(page).to have_content('Log in as Admin')
     end
-
-    scenario "oauth doesn't show on sign up" do
-      visit new_user_registration_path
-      expect(page).not_to have_content('Sign in with')
-    end
   end
 
   context "admin" do
