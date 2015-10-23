@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 describe "Admin Item Actions", type: :feature do
-  let(:admin_user) { create(:admin_user) }
+  let(:admin_users) { create_list(:admin_user, 2) }
+  let(:admin_user1) { admin_users.first }
+  let(:admin_user2) { admin_users.last }
 
   before do
     given_i_visit_the_app
@@ -12,24 +14,19 @@ describe "Admin Item Actions", type: :feature do
   end
 
   scenario "admin can create item" do
-    click_on 'Create a new Item'
-    when_i_fill_in_item_details
-    expect(page).to have_content('Item successfully created')
-  end
-
-  before do
-    create(:item)
-    admin_login admin_user
+    admin_item_create
   end
 
   scenario "admin can sell valid item" do
+    admin_item_create
     click_on 'Sell'
     fill_in 'Quantity Sold', with: 2
     click_on 'Sold'
-    expect(page).to have_content("You just sold 2 piece(s) of Cassette")
+    expect(page).to have_content("You just sold 2 piece(s) of Mortal Kombat X")
   end
 
   scenario "admin can not sell wrong quantity of item" do
+    admin_item_create
     click_on 'Sell'
     fill_in 'Quantity Sold', with: 4
     click_on 'Sold'
@@ -37,38 +34,55 @@ describe "Admin Item Actions", type: :feature do
   end
 
   scenario "admin can not sell without new sale value" do
+    admin_item_create
     click_on 'Sell'
     click_on 'Sold'
     expect(page).to have_content('No sale')
   end
 
   scenario "admin can update item" do
+    admin_item_create
     click_on 'Edit'
     select 'Fashion', from: 'Category'
     click_on 'Save'
     expect(page).not_to have_content("Music")
     expect(page).to have_content("Fashion")
-    expect(page).to have_content("'Cassette' has been successfully updated")
+    expect(page).to have_content("'Mortal Kombat X' has been successfully updated")
   end
 
   scenario "admin can delete item" do
+    admin_item_create
     click_on 'Delete'
     expect(page).not_to have_content("Music")
     expect(page).to have_content("This item has been successfully deleted")
   end
 
   scenario "admin can not set minimum quantity to 0" do
+    admin_item_create
     click_on 'Edit'
     fill_in 'Minimum Quantity', with: 0
     click_on 'Save'
     expect(page).to have_content('should not be 0')
   end
 
+  scenario "second admin cannot see first admin item" do
+    admin_login admin_user2
+    expect(page).not_to have_content('Mortal Kombat X')
+    expect(page).not_to have_content('sell')
+  end
+
+  def admin_item_create
+    admin_login admin_user1
+    click_on 'Create a new Item'
+    when_i_fill_in_item_details
+    expect(page).to have_content('Item successfully created')
+  end
+
   def when_i_fill_in_item_details
     select 'Games', from: 'Category'
     fill_in 'Name', with: 'Mortal Kombat X'
-    fill_in 'Quantity', with: '30'
-    fill_in 'Minimum Quantity', with: '10'
+    fill_in 'Quantity', with: '3'
+    fill_in 'Minimum Quantity', with: '1'
     click_on 'Save'
   end
 end
