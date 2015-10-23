@@ -24,6 +24,9 @@ module Admin
     end
 
     def update
+      params[:admin_user].delete(:password) if params[:admin_user][:password].blank
+      params[:admin_user].delete(:password_confirmation) if params[:admin_user][:password_confirmation].blank?
+
       if @admin_user.update_attributes(admin_user_params)
         redirect_to admin_admin_users_path,
         notice: "Admin user has been successfully updated" # use names
@@ -41,7 +44,7 @@ module Admin
     private
 
     def admin_user_params
-      params.require(:admin_user).permit(:email, :password, :password_confirmation, :role, :name, :establishment)
+      params.require(:admin_user).permit(:email, :password, :password_confirmation, :role, :first_name, :last_name, :establishment)
     end
   end
 end

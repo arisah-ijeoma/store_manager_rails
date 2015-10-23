@@ -1,7 +1,7 @@
 = content_tag_for :tr, admin_user do
   %td
     = link_to admin_user.email # admin_user PROFILE
-  %td= admin_user.role
+  %td= admin_user.admin_full_name
   %td= admin_user.establishment
   %td
     = link_to 'Edit', edit_admin_admin_user_path(admin_user)
