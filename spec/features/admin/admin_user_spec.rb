@@ -92,6 +92,8 @@ describe "Admin User Actions", type: :feature do
       click_on 'View Admins'
       click_on 'Create a new Admin'
       fill_in 'Email', with: 'jay@admin.com'
+      fill_in 'First name', with: 'Jay'
+      fill_in 'Last name', with: 'Jay'
       fill_in 'Password', with: 'password'
       fill_in 'Password confirmation', with: 'password'
       click_on 'Save'
@@ -120,8 +122,6 @@ describe "Admin User Actions", type: :feature do
     def when_i_update_the_admin
       click_on 'Edit'
       fill_in 'Email', with: 'jay@ad.com'
-      fill_in 'Password', with: 'password'
-      fill_in 'Password confirmation', with: 'password'
       click_on 'Save'
     end
 

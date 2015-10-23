@@ -34,7 +34,6 @@ describe "Devise", type: :feature do
     scenario "sign up is no longer accessible" do
       visit '/admin_users/sign_up'
       expect(page).to have_content('Log in')
-      expect(page).to have_content('Sign in with Facebook')
       expect(page).to have_content('Log in as Admin')
     end
   end
