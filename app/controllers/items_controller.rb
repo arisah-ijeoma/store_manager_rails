@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
+  before_action :get_user
+
   def index
-    @items = Item.all
+    @items = @user.admin_user.items
   end
 
   def sell
