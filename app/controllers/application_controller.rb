@@ -43,6 +43,10 @@ class ApplicationController < ActionController::Base
     render file: "errors/#{status_code}.html", :status => status_code, :layout => false
   end
 
+  def get_user
+    @user = current_user
+  end
+
   protected
 
   def layout_by_resource
