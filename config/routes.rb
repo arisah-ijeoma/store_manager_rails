@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { sessions: 'sessions', omniauth_callbacks: "omniauth_callbacks" }
-  devise_for :admin_users, skip: :registrations , controllers: { sessions: "admin/sessions" }
+  devise_for :users, controllers: { sessions: 'sessions' }
+  devise_for :admin_users , controllers: { sessions: "admin/sessions" }
 
   namespace :admin do
     root 'items#index'
@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       post :update_sale, on: :member
     end
     resources :admin_users
+    resources :users
 
     get '*a' => 'errors#show'
   end
