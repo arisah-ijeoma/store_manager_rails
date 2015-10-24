@@ -6,7 +6,7 @@ describe Ability do
     let(:super_admin_user) { create(:super_admin_user) }
     let(:ability) { Ability.new(super_admin_user) }
 
-    it "should be able to manage everything" do
+    it "manages everything" do
       expect(ability.can?(:manage, :all)).to be true
     end
   end
@@ -16,8 +16,16 @@ describe Ability do
       let(:admin_user) { create(:admin_user) }
       let(:ability) { Ability.new(admin_user) }
 
-      it "should be able to manage items" do
+      it "can not manage everything" do
+        expect(ability.can?(:manage, :all)).to be false
+      end
+
+      it "manages items" do
         expect(ability.can?(:manage, Item)).to be true
+      end
+
+      it "manages users" do
+        expect(ability.can?(:manage, User)).to be true
       end
     end
   end
@@ -27,11 +35,20 @@ describe Ability do
       let(:user) { create(:user) }
       let(:ability) { Ability.new(user) }
 
-      it "should be able to update items" do
+      it "can sell items" do
         expect(ability.can?(:sell, Item)).to be true
       end
-      it "should be able to read items" do
+
+      it "can read items" do
         expect(ability.can?(:read, Item)).to be true
+      end
+
+      it "cannot create items" do
+        expect(ability.can?(:create, Item)).to be false
+      end
+
+      it "cannot update items" do
+        expect(ability.can?(:update, Item)).to be false
       end
     end
   end

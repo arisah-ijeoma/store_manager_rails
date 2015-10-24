@@ -7,6 +7,7 @@ class Ability
         can :manage, :all
       else
         can :manage, Item
+        can :manage, User
       end
     else
       can [:sell, :read], Item
