@@ -1,0 +1,10 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th Email
+      %th Name
+      %th
+  %tbody
+    = render @users
+
+= link_to 'Create a new Employee', new_admin_user_path

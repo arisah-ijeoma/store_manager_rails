@@ -1,16 +1,15 @@
-- if @admin_user.new_record?
-  New Admin User
+- if @user.new_record?
+  New Employee
 - else
-  Edit Admin User
+  Edit Employee
 
-= semantic_form_for [:admin, @admin_user] do |f|
+= semantic_form_for [:admin, @user] do |f|
   = f.inputs do
     = f.input :email
     = f.input :first_name
     = f.input :last_name
     = f.input :password
     = f.input :password_confirmation
-    = f.input :establishment
     = f.action :submit, label: 'Save', button_html: {data: {disable_with: 'Please wait...'}}
 
-= link_to 'Back to Admin User List', admin_admin_users_path
+= link_to 'Back to Employee List', admin_users_path
