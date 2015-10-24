@@ -11,6 +11,7 @@
     .container
       .row
         .log-box.col.s12.col.m7{style: "padding: 20px"}
-          = render 'devise/shared/errors'
-          = yield
-          = render 'layouts/footer'
+          #devise
+            = render 'devise/shared/errors'
+            = yield
+            = render 'layouts/footer'

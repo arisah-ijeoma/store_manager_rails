@@ -1,3 +1,7 @@
-- flash.each do |name, msg|
-  - alert_class = alert_color(name)
-  = content_tag :div, msg, id: "flash_#{name}", class: "alert alert-#{alert_class}"
+- flash.each do |type, message|
+  - if current_user || current_admin_user
+    - alert_class = alert_color(type)
+    = content_tag :div, message, id: "flash_#{type}", class: "alert alert-#{alert_class}"
+  - else
+    .alert.alert-danger
+      = message
