@@ -5,5 +5,6 @@ FactoryGirl.define do
     last_name 'Jay'
     password "password"
     password_confirmation "password"
+    association(:admin_user)
   end
 end

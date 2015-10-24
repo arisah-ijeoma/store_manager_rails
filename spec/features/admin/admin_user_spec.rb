@@ -27,10 +27,10 @@ describe "Admin User Actions", type: :feature do
     end
 
     scenario "admin user can create new items" do
-      i_should_be_able_to_create_an_item
+      i_can_create_an_item
     end
 
-    def i_should_be_able_to_create_an_item
+    def i_can_create_an_item
       expect(page).to have_content('Create a new Item')
     end
   end
@@ -43,29 +43,29 @@ describe "Admin User Actions", type: :feature do
     end
 
     scenario "super admin user can create other admin users" do
-      super_admin_can_create_regular_admin
+      super_can_create_regular_admin
     end
 
     scenario "created admin has access" do
-      super_admin_can_create_regular_admin
+      super_can_create_regular_admin
       when_i_log_out
       and_log_in_as_the_new_admin
       then_i_should_have_access
     end
 
     scenario "super admin user can update other admin users" do
-      super_admin_can_update_regular_admin
+      super_can_update_regular_admin
     end
 
     scenario "previous admin does not have access" do
-      super_admin_can_update_regular_admin
+      super_can_update_regular_admin
       when_i_log_out
       and_log_in_as_the_new_admin
       then_i_should_not_have_access
     end
 
     scenario "updated admin has access" do
-      super_admin_can_update_regular_admin
+      super_can_update_regular_admin
       when_i_log_out
       and_log_in_as_the_updated_admin
       then_i_should_have_access
@@ -77,15 +77,15 @@ describe "Admin User Actions", type: :feature do
       then_he_should_not_be_available
     end
 
-    def super_admin_can_create_regular_admin
+    def super_can_create_regular_admin
       when_i_create_a_new_admin
       then_i_should_see_him
     end
 
-    def super_admin_can_update_regular_admin
-      super_admin_can_create_regular_admin
+    def super_can_update_regular_admin
+      super_can_create_regular_admin
       when_i_update_the_admin
-      then_i_should_see_the_updated_details
+      then_i_should_see_the_new_details
     end
 
     def when_i_create_a_new_admin
@@ -125,7 +125,7 @@ describe "Admin User Actions", type: :feature do
       click_on 'Save'
     end
 
-    def then_i_should_see_the_updated_details
+    def then_i_should_see_the_new_details
       expect(page).to have_content('jay@ad.com')
       expect(page).to have_content('Edit')
     end
@@ -141,7 +141,7 @@ describe "Admin User Actions", type: :feature do
     end
 
     def given_there_is_a_regular_admin
-      super_admin_can_create_regular_admin
+      super_can_create_regular_admin
       expect(page).to have_content("jay@admin.com")
     end
 

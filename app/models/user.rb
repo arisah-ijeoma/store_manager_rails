@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :admin_user_id, presence: true
 
   delegate :establishment, to: :admin_user
 
