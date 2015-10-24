@@ -103,8 +103,8 @@ describe "Admin User Actions", type: :feature do
 
     def and_log_in_as_new_employee
       click_on 'Log in as User'
-      fill_in 'Email', with: 'jay@user.com'
-      fill_in 'Password', with: 'password'
+      fill_in 'user_email', with: 'jay@user.com'
+      fill_in 'user_password', with: 'password'
       click_on 'Log in'
     end
 
@@ -132,8 +132,8 @@ describe "Admin User Actions", type: :feature do
 
     def and_log_in_with_old_details
       click_on 'Log in as User'
-      fill_in 'Email', with: 'jay@user.com'
-      fill_in 'Password', with: 'password'
+      fill_in 'user_email', with: 'jay@user.com'
+      fill_in 'user_password', with: 'password'
       click_on 'Log in'
     end
 
@@ -143,8 +143,8 @@ describe "Admin User Actions", type: :feature do
 
     def and_log_in_with_new_details
       click_on 'Log in as User'
-      fill_in 'Email', with: 'jay@us.com'
-      fill_in 'Password', with: 'password'
+      fill_in 'user_email', with: 'jay@us.com'
+      fill_in 'user_password', with: 'password'
       click_on 'Log in'
     end
 
@@ -250,8 +250,8 @@ describe "Admin User Actions", type: :feature do
     end
 
     def and_log_in_as_the_new_admin
-      fill_in 'Email', with: 'jay@admin.com'
-      fill_in 'Password', with: 'password'
+      fill_in 'admin_user_email', with: 'jay@admin.com'
+      fill_in 'admin_user_password', with: 'password'
       click_on 'Log in'
     end
 
@@ -276,8 +276,8 @@ describe "Admin User Actions", type: :feature do
     end
 
     def and_log_in_as_the_updated_admin
-      fill_in 'Email', with: 'jay@ad.com'
-      fill_in 'Password', with: 'password'
+      fill_in 'admin_user_email', with: 'jay@ad.com'
+      fill_in 'admin_user_password', with: 'password'
       click_on 'Log in'
     end
 

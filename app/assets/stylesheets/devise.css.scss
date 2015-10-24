@@ -29,6 +29,59 @@ html {
   transform: translate(50%, 50%);
 }
 
+#devise {
+
+  a {
+    color: #a00;
+    padding: 5px;
+  }
+
+  a:visited {
+    color: #a00;
+  }
+
+  a:hover {
+    color: #000;
+  }
+
+  .login {
+    font-size: 1.5em;
+  }
+
+  .login:focus {
+    border-bottom: 1px solid #a00;
+    box-shadow: 0 1px 0 0 #a00;
+  }
+
+  .login:checked + label:before {
+    border-right: 2px solid #a00;
+    border-bottom: 2px solid #a00;
+  }
+
+  label {
+    color: #000;
+  }
+
+  .btn {
+    background-color: #a00;
+    color: #fff;
+    font-size: 1.5em;
+    padding-bottom: 43px;
+  }
+
+  .alert {
+    &.alert-danger {
+      background-color: #a00;
+      font-size: 1.5em;
+    }
+
+    &.alert-success {
+      background-color: #0a0;
+      font-size: 1.5em;
+    }
+  }
+
+}
 
 /*********************************
         MEDIA QUERIES

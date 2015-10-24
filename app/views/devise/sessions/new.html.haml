@@ -1,17 +1,21 @@
-%h2 Log in
+%h2 Log In
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true
+    - if resource_name == :admin_user
+      = f.email_field :email, autofocus: true, placeholder: "ADMIN EMAIL", class: 'login'
+    - else
+      = f.email_field :email, autofocus: true, placeholder: "EMAIL", class: 'login'
+  %br/
   .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "off"
+    - if resource_name == :admin_user
+      = f.password_field :password, autocomplete: "off", placeholder: "ADMIN PASSWORD", class: 'login'
+    - else
+      = f.password_field :password, autocomplete: "off", placeholder: "PASSWORD", class: 'login'
   - if devise_mapping.rememberable?
     .field
-      = f.check_box :remember_me
+      = f.check_box :remember_me, class: 'login'
       = f.label :remember_me
+    %br/
   .actions
-    = f.submit "Log in"
+    = f.submit "Log in", class: 'btn'
 = render "devise/shared/links"
