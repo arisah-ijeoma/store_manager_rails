@@ -8,6 +8,7 @@ class AdminUser < ActiveRecord::Base
 
   validates :first_name, presence: true
   validates :last_name, presence: true
+  validates :establishment, presence: true
 
   ROLES = %w(super regular) unless defined? ROLES
 
