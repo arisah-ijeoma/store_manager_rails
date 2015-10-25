@@ -10,6 +10,8 @@
     = f.input :last_name
     = f.input :password
     = f.input :password_confirmation
+    = f.input :nick, input_html: { readonly: true, class: 'input-readonly' }
+    -# employee will update this field notice
     = f.action :submit, label: 'Save', button_html: {data: {disable_with: 'Please wait...'}}
 
 = link_to 'Back to Employee List', admin_users_path

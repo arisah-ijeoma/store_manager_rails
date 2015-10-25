@@ -126,6 +126,7 @@ describe "Admin User Actions", type: :feature do
     end
 
     def then_he_should_be_available
+      expect(page).to have_content("You have successfully updated your employee")
       expect(page).to have_content('jay@us.com')
       expect(page).to have_content('Edit')
     end
@@ -162,7 +163,7 @@ describe "Admin User Actions", type: :feature do
     end
 
     def then_he_should_not_exist
-      expect(page).to have_content("Employee has been successfully deleted")
+      expect(page).to have_content("You have successfully deleted your employee")
       expect(page).not_to have_content("jay@user.com")
     end
 

@@ -31,7 +31,7 @@ module Admin
 
       if @user.update_attributes(user_params)
         redirect_to admin_users_path,
-        notice: "Your Employee has been successfully updated" # use names
+        notice: "You have successfully updated your employee" # use names
       else
         render :edit
       end
@@ -40,13 +40,13 @@ module Admin
     def destroy
       @user.destroy
       redirect_to admin_items_path,
-      notice: "Your Employee has been successfully deleted" # use names
+      notice: "You have successfully deleted your employee" # use names
     end
 
     private
 
     def user_params
-      params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation)
+      params.require(:user).permit(:email, :first_name, :last_name, :password, :password_confirmation, :nick)
     end
   end
 end

@@ -1,5 +1,9 @@
 - if user_signed_in?
-  = "Hi #{current_user.email}"
+  Hi
+  - if current_user.nick.present?
+    = link_to "#{current_user.nick}", edit_user_path(current_user)
+  - else
+    = link_to "#{current_user.email}", edit_user_path(current_user)
   .pull-right
     = link_to "#{current_user.establishment}", root_path
   = link_to 'Log Out', destroy_user_session_path, method: :delete
