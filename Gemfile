@@ -22,11 +22,6 @@ gem 'haml-rails'
 # Sensitive data
 gem 'figaro'
 
-# Oauth login
-gem 'omniauth'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-facebook'
-
 # Form builder
 gem 'formtastic', '~> 3.0'
 
