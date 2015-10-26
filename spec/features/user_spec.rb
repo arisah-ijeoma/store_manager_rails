@@ -24,8 +24,8 @@ describe "User Actions", type: :feature do
     click_on "Hakuna Matata"
     fill_in "Nickname", with: ""
     click_on 'Save'
-    expect(page).to have_content("Hi #{user.email}")
-    expect(page).not_to have_content("Hi Hakuna Matata")
+    expect(page).to have_content("Hi, #{user.email}")
+    expect(page).not_to have_content("Hi, Hakuna Matata")
   end
 
   def given_i_log_in
@@ -56,7 +56,7 @@ describe "User Actions", type: :feature do
 
   def then_i_should_be_updated
     expect(page).to have_content('You have been updated')
-    expect(page).to have_content('Hi Hakuna Matata')
-    expect(page).not_to have_content("Hi #{user.email}")
+    expect(page).to have_content('Hi, Hakuna Matata')
+    expect(page).not_to have_content("Hi, #{user.email}")
   end
 end
