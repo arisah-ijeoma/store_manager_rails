@@ -32,3 +32,15 @@ select {
   width: initial;
   display: inline-block;
 }
+
+.input-readonly {
+  display: block;
+  box-sizing: border-box !important;
+  background-color: #ddd !important;
+  border: none !important;
+}
+
+.input-readonly:focus {
+  border: none !important;
+  box-shadow: none !important;
+}

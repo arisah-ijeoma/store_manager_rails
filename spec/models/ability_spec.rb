@@ -50,6 +50,14 @@ describe Ability do
       it "cannot update items" do
         expect(ability.can?(:update, Item)).to be false
       end
+
+      it "can update himself" do
+        expect(ability.can?(:update, User)).to be true
+      end
+
+      it "cannot create himself" do
+        expect(ability.can?(:create, User)).to be false
+      end
     end
   end
 end
