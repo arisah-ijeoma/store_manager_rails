@@ -96,6 +96,7 @@ RSpec.configure do |config|
   config.include FeatureHelper, type: :feature
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
+  config.include Devise::TestHelpers, type: :view
 
   Capybara.configure do |config|
     config.match = :prefer_exact
