@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 describe "Admin User Actions", type: :feature do
-  let(:admin_users) { create_list(:admin_user, 2) }
-  let(:admin_user1) { admin_users.first }
-  let(:admin_user2) { admin_users.last }
+  let(:admin_user1) { create(:admin_user) }
+  let(:admin_user2) { create(:admin_user, establishment: "Mount Everest") }
   let(:super_admin) { create(:super_admin_user) }
 
   context "General Testing" do
