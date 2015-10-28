@@ -1,0 +1,12 @@
+- @admin_employees.each do |employee|
+  %tr
+    %td
+      = employee.email
+    %td
+      = employee.full_name
+    %td
+      = employee.establishment
+    %td
+      = employee.nick #change to main phone number when the story is done
+
+= link_to 'Back', :back

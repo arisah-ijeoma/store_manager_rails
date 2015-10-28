@@ -1,0 +1,16 @@
+%h4= "#{@admin_user.admin_full_name}'s Profile"
+
+.row
+  %p
+    = "Full Name: #{@admin_user.salutation} #{@admin_user.first_name} #{@admin_user.last_name}"
+  %p
+    = "Phone Number: #{@admin_user.phone_number}"
+  %p
+    = "Establishment: #{@admin_user.establishment}"
+  %p
+    = "Role: #{@admin_user.role.capitalize}"
+  %p
+    = link_to "#{@admin_user.admin_full_name}'s Employees", admin_employees_admin_admin_user_path(@admin_user)
+
+.pull-right
+  = link_to 'Back to Admin List', :back

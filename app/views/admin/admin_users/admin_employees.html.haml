@@ -1,0 +1,14 @@
+%h4
+  = "#{@admin_user.admin_full_name}'s Employees"
+.pull-right
+  = "The client has #{@admin_user.users.count} employee(s)"
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th Email
+      %th Full Name
+      %th Establishment
+      %th Nick
+  %tbody
+    = render 'admin_employees_list'

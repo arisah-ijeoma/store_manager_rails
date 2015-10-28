@@ -8,9 +8,11 @@ Rails.application.routes.draw do
       get :sell, on: :member
       post :update_sale, on: :member
     end
-    resources :admin_users
+    resources :admin_users do
+      get :admin_employees, on: :member
+    end
     resources :users
-    resource :profile
+    resource :profile, only: [:show, :edit, :update]
 
     get '*a' => 'errors#show'
   end

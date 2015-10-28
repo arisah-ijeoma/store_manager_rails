@@ -6,7 +6,7 @@ class AdminUser < ActiveRecord::Base
   has_many :users, dependent: :destroy
   has_many :items, through: :admin_user_items
   has_many :admin_user_items
-  has_one :profile
+  has_one :profile, dependent: :destroy
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -15,6 +15,9 @@ class AdminUser < ActiveRecord::Base
   ROLES = %w(super regular) unless defined? ROLES
 
   scope :regular_admins, -> { where(role: 'regular') }
+
+  delegate :salutation, to: :profile
+  delegate :phone_number, to: :profile
 
   def admin_full_name
     self.first_name + " " + self.last_name

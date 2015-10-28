@@ -1,0 +1,13 @@
+-# decide on styling
+
+.row
+  %p
+    = "Full Name: #{@profile.salutation} #{@profile.first_name} #{@profile.last_name}"
+  %p
+    = "Phone Number: #{@profile.phone_number}"
+  %p
+    = "Establishment: #{@profile.establishment}"
+  %p
+    = "Role: #{@profile.role.capitalize}"
+  %p
+    = link_to 'My Users', admin_employees_admin_admin_user_path(@admin_user)

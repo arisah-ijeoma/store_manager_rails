@@ -20,7 +20,14 @@ module Admin
       end
     end
 
+    def admin_employees
+      @admin_employees = @admin_user.users
+    end
+
     def edit
+    end
+
+    def show
     end
 
     def update
