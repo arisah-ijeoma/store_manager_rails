@@ -8,7 +8,8 @@
     = link_to "#{current_user.establishment}", root_path
   = link_to 'Log Out', destroy_user_session_path, method: :delete
 - else
-  = "Hi, #{current_admin_user.admin_full_name}"
+  Hi,
+  = link_to "#{current_admin_user.admin_full_name}", "/admin/profile"
   .pull-right
     = link_to "#{current_admin_user.establishment}", admin_root_path
   = link_to 'Log Out', destroy_admin_user_session_path, method: :delete

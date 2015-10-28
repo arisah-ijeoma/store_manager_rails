@@ -37,7 +37,7 @@ module Admin
 
     def destroy
       @admin_user.destroy
-      redirect_to admin_items_path,
+      redirect_to admin_admin_users_path,
       notice: "Admin user has been successfully deleted" # use names
     end
 

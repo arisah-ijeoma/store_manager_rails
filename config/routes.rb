@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     end
     resources :admin_users
     resources :users
+    resource :profile
 
     get '*a' => 'errors#show'
   end

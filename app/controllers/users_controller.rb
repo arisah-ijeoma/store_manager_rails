@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     params[:user].delete(:password_confirmation) if params[:user][:password_confirmation].blank?
 
     if @user.update_attributes(user_params)
-      redirect_to items_path, notice: "You have been updated" #   use names
+      redirect_to items_path, notice: "You have been updated"
     else
       render :edit
     end

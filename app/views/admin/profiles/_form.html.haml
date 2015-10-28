@@ -1,0 +1,13 @@
+Edit Your Profile
+= semantic_form_for [:admin, @profile], method: :put do |f|
+  = f.inputs do
+    = f.input :salutation, as: :select, :collection => %w(Dr. Mr. Mrs. Ms.), include_blank: 'Please Select'
+    = f.fields_for :admin_user do |a|
+      = a.input :first_name
+      = a.input :last_name
+      = a.input :password
+      = a.input :password_confirmation
+      = a.input :role
+      = a.input :establishment
+    = f.input :phone_number
+    = f.action :submit, label: 'Save', button_html: {data: {disable_with: 'Please wait...'}}
