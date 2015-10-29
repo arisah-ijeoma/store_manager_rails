@@ -217,6 +217,17 @@ describe "Admin User Actions", type: :feature do
       then_he_should_not_be_available
     end
 
+    scenario "super admin can view regular admin's employees" do
+      super_creates_regular_that_creates_employee
+      click_on 'Log Out'
+      admin_login super_admin
+      visit admin_admin_user_path(@admin_user)
+      click_on "#{@admin_user.admin_full_name}'s Employees"
+      expect(page).to have_content("#{@admin_user.admin_full_name}'s Employees")
+      expect(page).to have_content("The client has 1 employee(s)")
+      expect(page).to have_content("jay@user.com")
+    end
+
     def super_can_create_regular_admin
       when_i_create_a_new_admin
       then_i_should_see_him
@@ -293,6 +304,31 @@ describe "Admin User Actions", type: :feature do
     def then_he_should_not_be_available
       expect(page).to have_content("Admin user has been successfully deleted")
       expect(page).not_to have_content("jay@admin.com")
+    end
+
+    def super_creates_regular_that_creates_employee
+      given_i_create_a_regular_admin
+      when_i_log_out
+      and_log_in_as_the_regular_admin
+      then_he_creates_an_employee
+    end
+
+    def given_i_create_a_regular_admin
+      @admin_user = create(:admin_user)
+    end
+
+    def and_log_in_as_the_regular_admin
+      admin_login @admin_user
+    end
+
+    def then_he_creates_an_employee
+      visit new_admin_user_path
+      fill_in 'Email', with: 'jay@user.com'
+      fill_in 'First name', with: 'Yeko'
+      fill_in 'Last name', with: 'Yeko'
+      fill_in 'Password', with: 'password'
+      fill_in 'Password confirmation', with: 'password'
+      click_on 'Save'
     end
   end
 end
