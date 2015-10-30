@@ -23,6 +23,7 @@ describe "User Actions", type: :feature do
     user_first_update
     click_on "Edit Profile"
     fill_in "Nickname", with: ""
+    fill_in "Phone number", with: "12341231234"
     click_on 'Save'
     expect(page).to have_content("Hi, #{user.full_name}")
     expect(page).not_to have_content("Hi, Hakuna Matata")
@@ -40,7 +41,7 @@ describe "User Actions", type: :feature do
 
   def user_first_update
     given_i_log_in
-    and_edit_my_nick
+    and_edit_my_profile
     then_i_should_be_updated
   end
 
@@ -48,10 +49,11 @@ describe "User Actions", type: :feature do
     expect(page).to have_content('You are not authorized to view this page')
   end
 
-  def and_edit_my_nick
+  def and_edit_my_profile
     click_on 'Jay Jay'
     click_on 'Edit Profile'
     fill_in 'Nickname', with: 'Hakuna Matata'
+    fill_in "Phone number", with: "12341231234"
     click_on 'Save'
   end
 
