@@ -30,7 +30,8 @@ module Admin
 
     def profile_params
       params.require(:profile)
-            .permit(:phone_number,
+            .permit(:mobile_number,
+                    :phone_number,
                     :salutation,
                     admin_user_attributes: [
                       :id,

@@ -23,9 +23,10 @@ describe "User Actions", type: :feature do
     user_first_update
     click_on "Edit Profile"
     fill_in "Nickname", with: ""
-    fill_in "Phone number", with: "12341231234"
+    fill_in "Mobile number", with: "12341231234"
     click_on 'Save'
     expect(page).to have_content("Hi, #{user.full_name}")
+    expect(page).not_to have_content("Phone number")
     expect(page).not_to have_content("Hi, Hakuna Matata")
   end
 
@@ -53,7 +54,8 @@ describe "User Actions", type: :feature do
     click_on 'Jay Jay'
     click_on 'Edit Profile'
     fill_in 'Nickname', with: 'Hakuna Matata'
-    fill_in "Phone number", with: "12341231234"
+    fill_in "Mobile number", with: "12341231234"
+    fill_in "Phone number", with: "12121212122"
     click_on 'Save'
   end
 
@@ -61,5 +63,7 @@ describe "User Actions", type: :feature do
     expect(page).to have_content('Successfully updated profile')
     expect(page).to have_content('Hi, Hakuna Matata')
     expect(page).not_to have_content("Hi, #{user.full_name}")
+    expect(page).to have_content("Phone Number")
+    expect(page).to have_content("12121212122")
   end
 end

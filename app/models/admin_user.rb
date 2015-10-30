@@ -16,7 +16,7 @@ class AdminUser < ActiveRecord::Base
 
   scope :regular_admins, -> { where(role: 'regular') }
 
-  delegate :salutation, :phone_number, to: :profile
+  delegate :salutation, :mobile_number, :phone_number, to: :profile
 
   def admin_full_name
     if self.salutation.present?

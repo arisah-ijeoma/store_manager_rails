@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates :admin_user_id, presence: true
 
   delegate :establishment, to: :admin_user
-  delegate :salutation, :phone_number, to: :profile
+  delegate :salutation, :mobile_number, :phone_number, to: :profile
 
   def full_name
     if self.salutation.present?

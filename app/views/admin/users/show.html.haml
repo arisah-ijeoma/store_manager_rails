@@ -4,7 +4,10 @@
   %p
     = "Full Name: #{@user.salutation} #{@user.first_name} #{@user.last_name}"
   %p
-    = "Phone Number: #{@user.phone_number}"
+    = "Mobile Number: #{@user.mobile_number}"
+  - if @user.phone_number.present?
+    %p
+      = "Phone Number: #{@user.phone_number}"
   %p
     = "Establishment: #{@user.establishment}"
   %p

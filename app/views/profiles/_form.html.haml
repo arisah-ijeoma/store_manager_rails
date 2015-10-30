@@ -9,5 +9,6 @@ Edit Your Profile
       = u.input :password
       = u.input :password_confirmation
       = u.input :nick, label: 'Nickname'
+    = f.input :mobile_number
     = f.input :phone_number
     = f.action :submit, label: 'Save', button_html: {data: {disable_with: 'Please wait...'}}

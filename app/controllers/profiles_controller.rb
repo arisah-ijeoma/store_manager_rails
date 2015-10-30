@@ -28,7 +28,8 @@ class ProfilesController < ApplicationController
 
   def profile_params
     params.require(:profile)
-        .permit(:phone_number,
+        .permit(:mobile_number,
+                :phone_number,
                 :salutation,
                 user_attributes: [
                     :id,
