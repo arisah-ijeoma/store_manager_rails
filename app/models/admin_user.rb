@@ -1,5 +1,5 @@
 class AdminUser < ActiveRecord::Base
-  after_create :build_profile
+  after_create :build_admin_profile
 
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
@@ -24,7 +24,7 @@ class AdminUser < ActiveRecord::Base
 
   private
 
-  def build_profile
+  def build_admin_profile
     Profile.create(admin_user: self)
   end
 end
