@@ -21,10 +21,10 @@ describe "User Actions", type: :feature do
 
   scenario "nick changes to email if not available" do
     user_first_update
-    click_on "Hakuna Matata"
+    click_on "Edit Profile"
     fill_in "Nickname", with: ""
     click_on 'Save'
-    expect(page).to have_content("Hi, #{user.email}")
+    expect(page).to have_content("Hi, #{user.full_name}")
     expect(page).not_to have_content("Hi, Hakuna Matata")
   end
 
@@ -49,14 +49,15 @@ describe "User Actions", type: :feature do
   end
 
   def and_edit_my_nick
-    click_on user.email
+    click_on 'Jay Jay'
+    click_on 'Edit Profile'
     fill_in 'Nickname', with: 'Hakuna Matata'
     click_on 'Save'
   end
 
   def then_i_should_be_updated
-    expect(page).to have_content('You have been updated')
+    expect(page).to have_content('Successfully updated profile')
     expect(page).to have_content('Hi, Hakuna Matata')
-    expect(page).not_to have_content("Hi, #{user.email}")
+    expect(page).not_to have_content("Hi, #{user.full_name}")
   end
 end

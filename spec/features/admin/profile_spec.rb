@@ -28,4 +28,19 @@ describe "Admin Profile", type: :feature do
     expect(page).to have_content("Jay Jay")
     expect(page).to have_content("Edit Profile")
   end
+
+  scenario "Admin can access his employee's profile" do
+    given_the_admin_has_an_employee
+    when_the_admin_clicks_on_his_employee
+  end
+
+  def given_the_admin_has_an_employee
+    @employee = create(:user, admin_user: admin_user)
+  end
+
+  def when_the_admin_clicks_on_his_employee
+    visit admin_users_path
+    click_on "#{@employee.email}"
+    expect(page).to have_content("#{@employee.full_name}'s Profile")
+  end
 end

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     post :update_sale, on: :member
   end
   resources :users, only: [:edit, :update]
+  resource :profile, only: [:show, :edit, :update]
 
   get '*a' => 'errors#show'
 end

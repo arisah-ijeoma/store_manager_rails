@@ -11,10 +11,14 @@ class User < ActiveRecord::Base
   validates :admin_user_id, presence: true
 
   delegate :establishment, to: :admin_user
-  delegate :phone_number, to: :profile
+  delegate :salutation, :phone_number, to: :profile
 
   def full_name
-    self.first_name + " " + self.last_name
+    if self.salutation.present?
+      self.salutation + "  " + self.first_name + " " + self.last_name
+    else
+      self.first_name + " " + self.last_name
+    end
   end
 
   private

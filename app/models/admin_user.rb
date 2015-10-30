@@ -19,7 +19,11 @@ class AdminUser < ActiveRecord::Base
   delegate :salutation, :phone_number, to: :profile
 
   def admin_full_name
-    self.first_name + " " + self.last_name
+    if self.salutation.present?
+      self.salutation + "  " + self.first_name + " " + self.last_name
+    else
+      self.first_name + " " + self.last_name
+    end
   end
 
   private

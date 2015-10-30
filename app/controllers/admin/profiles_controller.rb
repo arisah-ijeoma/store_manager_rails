@@ -32,16 +32,9 @@ module Admin
       params.require(:profile)
             .permit(:phone_number,
                     :salutation,
-                    user_attributes: [
-                      :id,
-                      :first_name,
-                      :last_name,
-                      :password,
-                      :password_confirmation,
-                      :nick
-                    ],
                     admin_user_attributes: [
                       :id,
+                      :email,
                       :first_name,
                       :last_name,
                       :password,

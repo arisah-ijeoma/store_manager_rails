@@ -94,6 +94,7 @@ describe "Admin User Actions", type: :feature do
 
     def then_he_should_exist
       expect(page).to have_content("A new Employee has been successfully created")
+      expect(page).to have_content("You have 1 employee(s)")
     end
 
     def when_i_sign_out
@@ -108,7 +109,7 @@ describe "Admin User Actions", type: :feature do
     end
 
     def then_i_should_be_logged_in
-      expect(page).to have_content('jay@user.com')
+      expect(page).to have_content('Yeko Yeko')
       expect(page).to have_content('Cookie Bar')
     end
 
@@ -149,7 +150,7 @@ describe "Admin User Actions", type: :feature do
     end
 
     def then_i_should_exist
-      expect(page).to have_content('jay@us.com')
+      expect(page).to have_content('Yeko Yeko')
     end
 
     def given_there_is_an_employee
@@ -303,6 +304,7 @@ describe "Admin User Actions", type: :feature do
 
     def then_he_should_not_be_available
       expect(page).to have_content("Admin user has been successfully deleted")
+      expect(page).to have_content("There are currently 0 client(s) on the platform")
       expect(page).not_to have_content("jay@admin.com")
     end
 
