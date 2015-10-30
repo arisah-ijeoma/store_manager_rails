@@ -20,7 +20,14 @@ module Admin
       end
     end
 
+    def admin_employees
+      @admin_employees = @admin_user.users
+    end
+
     def edit
+    end
+
+    def show
     end
 
     def update
@@ -29,7 +36,7 @@ module Admin
 
       if @admin_user.update_attributes(admin_user_params)
         redirect_to admin_admin_users_path,
-        notice: "Admin user has been successfully updated" # use names
+        notice: "#{@admin_user.admin_full_name} has been successfully updated"
       else
         render :edit
       end
@@ -37,8 +44,8 @@ module Admin
 
     def destroy
       @admin_user.destroy
-      redirect_to admin_items_path,
-      notice: "Admin user has been successfully deleted" # use names
+      redirect_to admin_admin_users_path,
+      notice: "#{@admin_user.admin_full_name} has been successfully deleted"
     end
 
     private

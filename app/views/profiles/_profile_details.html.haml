@@ -1,0 +1,14 @@
+-# decide on styling
+
+.row
+  %p
+    = "Full Name: #{@profile.salutation} #{@profile.first_name} #{@profile.last_name}"
+  %p
+    = "Mobile Number: #{@profile.mobile_number}"
+  - if @profile.phone_number.present?
+    %p
+      = "Phone Number: #{@profile.phone_number}"
+  %p
+    = "Establishment: #{@profile.establishment}"
+  %p
+    = "Nick: #{@profile.nick}"

@@ -1,0 +1,15 @@
+- @admin_employees.each do |employee|
+  %tr
+    %td
+      = employee.email
+    %td
+      = employee.full_name
+    %td
+      = employee.establishment
+    %td
+      = employee.mobile_number
+    - if employee.phone_number.present?
+      %td
+        = employee.phone_number
+
+= link_to 'Back', :back

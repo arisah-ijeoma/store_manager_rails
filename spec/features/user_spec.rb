@@ -21,10 +21,12 @@ describe "User Actions", type: :feature do
 
   scenario "nick changes to email if not available" do
     user_first_update
-    click_on "Hakuna Matata"
+    click_on "Edit Profile"
     fill_in "Nickname", with: ""
+    fill_in "Mobile number", with: "12341231234"
     click_on 'Save'
-    expect(page).to have_content("Hi, #{user.email}")
+    expect(page).to have_content("Hi, #{user.full_name}")
+    expect(page).not_to have_content("Phone number")
     expect(page).not_to have_content("Hi, Hakuna Matata")
   end
 
@@ -40,7 +42,7 @@ describe "User Actions", type: :feature do
 
   def user_first_update
     given_i_log_in
-    and_edit_my_nick
+    and_edit_my_profile
     then_i_should_be_updated
   end
 
@@ -48,15 +50,20 @@ describe "User Actions", type: :feature do
     expect(page).to have_content('You are not authorized to view this page')
   end
 
-  def and_edit_my_nick
-    click_on user.email
+  def and_edit_my_profile
+    click_on 'Jay Jay'
+    click_on 'Edit Profile'
     fill_in 'Nickname', with: 'Hakuna Matata'
+    fill_in "Mobile number", with: "12341231234"
+    fill_in "Phone number", with: "12121212122"
     click_on 'Save'
   end
 
   def then_i_should_be_updated
-    expect(page).to have_content('You have been updated')
+    expect(page).to have_content('Successfully updated profile')
     expect(page).to have_content('Hi, Hakuna Matata')
-    expect(page).not_to have_content("Hi, #{user.email}")
+    expect(page).not_to have_content("Hi, #{user.full_name}")
+    expect(page).to have_content("Phone Number")
+    expect(page).to have_content("12121212122")
   end
 end

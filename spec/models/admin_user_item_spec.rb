@@ -22,7 +22,7 @@ describe AdminUserItem do
 
   context "Item" do
     it "has many admin users" do
-      admin_user_1 = create(:admin_user)
+      admin_user_1 = create(:admin_user, establishment: 'Mount Everest')
 
       item.admin_users <<  [admin_user, admin_user_1]
 

@@ -1,14 +1,15 @@
 - if current_user.present?
   Hi,
   - if current_user.nick.present?
-    = link_to "#{current_user.nick}", edit_user_path(current_user)
+    = link_to current_user.nick, profile_path
   - else
-    = link_to "#{current_user.email}", edit_user_path(current_user)
+    = link_to current_user.full_name, profile_path
   .pull-right
     = link_to "#{current_user.establishment}", root_path
   = link_to 'Log Out', destroy_user_session_path, method: :delete
 - else
-  = "Hi, #{current_admin_user.admin_full_name}"
+  Hi,
+  = link_to "#{current_admin_user.admin_full_name}", admin_profile_path
   .pull-right
     = link_to "#{current_admin_user.establishment}", admin_root_path
   = link_to 'Log Out', destroy_admin_user_session_path, method: :delete

@@ -1,0 +1,14 @@
+Edit Your Profile
+= semantic_form_for @profile, method: :put do |f|
+  = f.inputs do
+    = f.input :salutation, as: :select, :collection => %w(Dr. Mr. Mrs. Ms.), include_blank: 'Please Select'
+    = f.fields_for :user do |u|
+      = u.input :email, input_html: { readonly: true, class: 'input-readonly' }
+      = u.input :first_name, input_html: { readonly: true, class: 'input-readonly' }
+      = u.input :last_name, input_html: { readonly: true, class: 'input-readonly' }
+      = u.input :password
+      = u.input :password_confirmation
+      = u.input :nick, label: 'Nickname'
+    = f.input :mobile_number
+    = f.input :phone_number
+    = f.action :submit, label: 'Save', button_html: {data: {disable_with: 'Please wait...'}}

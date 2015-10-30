@@ -1,0 +1,17 @@
+%h4= "#{@user.full_name}'s Profile"
+
+.row
+  %p
+    = "Full Name: #{@user.salutation} #{@user.first_name} #{@user.last_name}"
+  %p
+    = "Mobile Number: #{@user.mobile_number}"
+  - if @user.phone_number.present?
+    %p
+      = "Phone Number: #{@user.phone_number}"
+  %p
+    = "Establishment: #{@user.establishment}"
+  %p
+    = "Nickname: #{@user.nick}"
+
+.pull-right
+  = link_to 'Back to Employee List', :back

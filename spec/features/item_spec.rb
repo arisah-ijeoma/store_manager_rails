@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 describe 'User Item Actions', type: :feature do
-  let(:admin_users) { create_list(:admin_user, 2) }
-  let(:admin_user) { admin_users.first }
-  let(:admin_user2) { admin_users.last }
+  let(:admin_user) { create(:admin_user) }
+  let(:admin_user2) { create(:admin_user, establishment: 'Mount Everest') }
   let(:user) { create(:user, admin_user: admin_user) }
   let(:user2) { create(:user, admin_user: admin_user) }
   let(:user3) { create(:user, admin_user: admin_user2) }

@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 describe "Admin User Actions", type: :feature do
-  let(:admin_users) { create_list(:admin_user, 2) }
-  let(:admin_user1) { admin_users.first }
-  let(:admin_user2) { admin_users.last }
+  let(:admin_user1) { create(:admin_user) }
+  let(:admin_user2) { create(:admin_user, establishment: "Mount Everest") }
   let(:super_admin) { create(:super_admin_user) }
 
   context "General Testing" do
@@ -95,6 +94,7 @@ describe "Admin User Actions", type: :feature do
 
     def then_he_should_exist
       expect(page).to have_content("A new Employee has been successfully created")
+      expect(page).to have_content("You have 1 employee(s)")
     end
 
     def when_i_sign_out
@@ -109,7 +109,7 @@ describe "Admin User Actions", type: :feature do
     end
 
     def then_i_should_be_logged_in
-      expect(page).to have_content('jay@user.com')
+      expect(page).to have_content('Yeko Yeko')
       expect(page).to have_content('Cookie Bar')
     end
 
@@ -150,7 +150,7 @@ describe "Admin User Actions", type: :feature do
     end
 
     def then_i_should_exist
-      expect(page).to have_content('jay@us.com')
+      expect(page).to have_content('Yeko Yeko')
     end
 
     def given_there_is_an_employee
@@ -218,6 +218,17 @@ describe "Admin User Actions", type: :feature do
       then_he_should_not_be_available
     end
 
+    scenario "super admin can view regular admin's employees" do
+      super_creates_regular_that_creates_employee
+      click_on 'Log Out'
+      admin_login super_admin
+      visit admin_admin_user_path(@admin_user)
+      click_on "#{@admin_user.admin_full_name}'s Employees"
+      expect(page).to have_content("#{@admin_user.admin_full_name}'s Employees")
+      expect(page).to have_content("The client has 1 employee(s)")
+      expect(page).to have_content("jay@user.com")
+    end
+
     def super_can_create_regular_admin
       when_i_create_a_new_admin
       then_i_should_see_him
@@ -269,6 +280,7 @@ describe "Admin User Actions", type: :feature do
 
     def then_i_should_see_the_new_details
       expect(page).to have_content('jay@ad.com')
+      expect(page).to have_content('Jay Jay has been successfully updated')
       expect(page).to have_content('Edit')
     end
 
@@ -292,8 +304,34 @@ describe "Admin User Actions", type: :feature do
     end
 
     def then_he_should_not_be_available
-      expect(page).to have_content("Admin user has been successfully deleted")
+      expect(page).to have_content("Jay Jay has been successfully deleted")
+      expect(page).to have_content("There are currently 0 client(s) on the platform")
       expect(page).not_to have_content("jay@admin.com")
+    end
+
+    def super_creates_regular_that_creates_employee
+      given_i_create_a_regular_admin
+      when_i_log_out
+      and_log_in_as_the_regular_admin
+      then_he_creates_an_employee
+    end
+
+    def given_i_create_a_regular_admin
+      @admin_user = create(:admin_user)
+    end
+
+    def and_log_in_as_the_regular_admin
+      admin_login @admin_user
+    end
+
+    def then_he_creates_an_employee
+      visit new_admin_user_path
+      fill_in 'Email', with: 'jay@user.com'
+      fill_in 'First name', with: 'Yeko'
+      fill_in 'Last name', with: 'Yeko'
+      fill_in 'Password', with: 'password'
+      fill_in 'Password confirmation', with: 'password'
+      click_on 'Save'
     end
   end
 end
