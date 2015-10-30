@@ -280,6 +280,7 @@ describe "Admin User Actions", type: :feature do
 
     def then_i_should_see_the_new_details
       expect(page).to have_content('jay@ad.com')
+      expect(page).to have_content('Jay Jay has been successfully updated')
       expect(page).to have_content('Edit')
     end
 
@@ -303,7 +304,7 @@ describe "Admin User Actions", type: :feature do
     end
 
     def then_he_should_not_be_available
-      expect(page).to have_content("Admin user has been successfully deleted")
+      expect(page).to have_content("Jay Jay has been successfully deleted")
       expect(page).to have_content("There are currently 0 client(s) on the platform")
       expect(page).not_to have_content("jay@admin.com")
     end
