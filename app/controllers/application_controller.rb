@@ -61,13 +61,8 @@ class ApplicationController < ActionController::Base
     params[:code] || 500
   end
 
-  def initialize_omniauth_state
-    session['omniauth.state'] = response.headers['X-CSRF-Token'] = form_authenticity_token
-  end
-
-
   def authenticate_user!
-    if current_admin_user
+    if current_admin_user.present?
       unless request.original_url.include?('/admin')
         redirect_to admin_root_path, notice: "You are not authorized to view this page"
       end
