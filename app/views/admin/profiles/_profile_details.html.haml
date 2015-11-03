@@ -13,4 +13,7 @@
   %p
     = "Role: #{@profile.role.capitalize}"
   %p
-    = link_to 'My Users', admin_employees_admin_admin_user_path(@admin_user)
+    - if can? :manage, :all
+      = link_to 'My Employees', admin_employees_admin_admin_user_path(@admin_user)
+    - else
+      = link_to 'My Employees', admin_users_path
