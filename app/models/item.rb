@@ -4,10 +4,18 @@ class Item < ActiveRecord::Base
 
   validate :min_qty_is_less_than_quantity
   validates :category, presence: true
-  validates :name, uniqueness: {case_sensitive: false, message: "This item already exists"}
-  validates_numericality_of :quantity, greater_than_or_equal_to: 0, only_integer: true
-  validates_numericality_of :quantity_sold, greater_than_or_equal_to: 0, only_integer: true
-  validates_numericality_of :min_qty, greater_than_or_equal_to: 0, only_integer: true
+  validates :name,
+            uniqueness: { case_sensitive: false,
+                          message: "This item already exists" }
+  validates_numericality_of :quantity,
+                            greater_than_or_equal_to: 0,
+                            only_integer: true
+  validates_numericality_of :quantity_sold,
+                            greater_than_or_equal_to: 0,
+                            only_integer: true
+  validates_numericality_of :min_qty,
+                            greater_than_or_equal_to: 0,
+                            only_integer: true
 
   ITEM_LIST = [
       "Books",

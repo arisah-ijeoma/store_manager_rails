@@ -1,7 +1,11 @@
 class AdminUser < ActiveRecord::Base
   after_create :build_admin_profile
 
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable,
+         :recoverable,
+         :rememberable,
+         :trackable,
+         :validatable
 
   has_many :users, dependent: :destroy
   has_many :items, through: :admin_user_items
@@ -10,9 +14,10 @@ class AdminUser < ActiveRecord::Base
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :establishment, presence: true, uniqueness: { case_sensitive: false, message: "This establishment already exists" }
-
-  ROLES = %w(super regular) unless defined? ROLES
+  validates :establishment,
+            presence: true,
+            uniqueness: { case_sensitive: false,
+                          message: "This establishment already exists" }
 
   scope :regular_admins, -> { where(role: 'regular') }
 

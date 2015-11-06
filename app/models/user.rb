@@ -1,7 +1,11 @@
 class User < ActiveRecord::Base
   after_create :build_profile
 
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable,
+         :recoverable,
+         :rememberable,
+         :trackable,
+         :validatable
 
   belongs_to :admin_user
   has_one :profile, dependent: :destroy
