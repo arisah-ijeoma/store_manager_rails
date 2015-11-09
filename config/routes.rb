@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :items, except: :show do
       get :sell, on: :member
       post :update_sale, on: :member
+      get :add_stock, on: :member
+      post :update_stock, on: :member
     end
     resources :admin_users do
       get :admin_employees, on: :member

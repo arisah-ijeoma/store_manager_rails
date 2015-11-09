@@ -43,6 +43,22 @@ module Admin
       end
     end
 
+    def add_stock
+    end
+
+    def update_stock
+      new_stock = (params[:item][:new_stock]).to_i
+
+      @item.quantity = @item.quantity + new_stock
+
+      if @item.save
+        redirect_to edit_admin_item_path,
+        notice: "You added #{new_stock} piece(s) of #{@item.name}"
+      else
+        redirect_to edit_admin_item_path
+      end
+    end
+
     def edit
     end
 
@@ -64,7 +80,7 @@ module Admin
     private
 
     def item_params
-      params.require(:item).permit(:category, :name, :quantity, :min_qty, :quantity_sold)
+      params.require(:item).permit(:category, :name, :quantity, :min_qty, :quantity_sold, :new_stock)
     end
   end
 end
