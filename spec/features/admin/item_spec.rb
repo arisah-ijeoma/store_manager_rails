@@ -70,6 +70,16 @@ describe "Admin Item Actions", type: :feature do
     expect(page).not_to have_content('sell')
   end
 
+  scenario "admin can add stock" do
+    admin_item_create
+    click_on 'Edit'
+    click_on 'Add New Stock'
+    fill_in 'Add New Stock', with: 10
+    click_on 'Add Stock'
+    expect(page).to have_field('Quantity', with: '13')
+    expect(page).to have_content("You added 10 piece(s) of Mortal Kombat X")
+  end
+
   def admin_item_create
     admin_login admin_user1
     click_on 'Create a new Item'

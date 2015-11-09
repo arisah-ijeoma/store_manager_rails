@@ -7,8 +7,13 @@
   = f.inputs do
     = f.input :category, as: :select, include_blank: 'Please Select', collection: Item::ITEM_LIST
     = f.input :name, placeholder: 'The name of the item'
-    = f.input :quantity, as: :number, placeholder: 'The quantity of the item'
+    - if @item.new_record?
+      = f.input :quantity, as: :number, placeholder: 'The quantity of the item'
+    - else
+      = f.input :quantity, as: :number, placeholder: 'The quantity of the item', input_html: { readonly: true, class: 'input-readonly' }
     = f.input :min_qty, label: "Minimum Quantity", as: :number, placeholder: 'The minimum quantity of the item before restock'
+    - if @item.persisted?
+      = link_to 'Add New Stock', add_stock_admin_item_path(@item)
     = f.action :submit, label: 'Save', button_html: {data: {disable_with: 'Please wait...'}}
 
 = link_to 'Back to Items List', admin_items_path
