@@ -2,8 +2,7 @@ require 'rails_helper'
 
 describe Item do
   context "associations" do
-    it {is_expected.to have_many :admin_users}
-    it {is_expected.to have_many :admin_user_items}
+    it {is_expected.to belong_to :admin_user}
   end
 
   context "valid items" do
