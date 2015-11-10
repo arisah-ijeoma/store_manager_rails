@@ -11,20 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106105230) do
+ActiveRecord::Schema.define(version: 20151110091253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "admin_user_items", force: :cascade do |t|
-    t.integer  "admin_user_id"
-    t.integer  "item_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "admin_user_items", ["admin_user_id"], name: "index_admin_user_items_on_admin_user_id", using: :btree
-  add_index "admin_user_items", ["item_id"], name: "index_admin_user_items_on_item_id", using: :btree
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "",        null: false
@@ -57,7 +47,10 @@ ActiveRecord::Schema.define(version: 20151106105230) do
     t.integer  "min_qty",                   null: false
     t.integer  "quantity_sold", default: 0, null: false
     t.integer  "new_stock",     default: 0, null: false
+    t.integer  "admin_user_id"
   end
+
+  add_index "items", ["admin_user_id"], name: "index_items_on_admin_user_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "phone_number"
@@ -95,6 +88,7 @@ ActiveRecord::Schema.define(version: 20151106105230) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "items", "admin_users"
   add_foreign_key "profiles", "admin_users"
   add_foreign_key "profiles", "users"
 end

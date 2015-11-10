@@ -1,12 +1,12 @@
 class Item < ActiveRecord::Base
-  has_many :admin_users, through: :admin_user_items
-  has_many :admin_user_items
+  belongs_to :admin_user
 
   validate :min_qty_is_less_than_quantity
   validates :category, presence: true
   validates :name,
             uniqueness: { case_sensitive: false,
-                          message: "This item already exists" }
+                          message: "This item already exists",
+                          scope: :admin_user_id }
   validates :quantity, :quantity_sold, :min_qty, :new_stock,
             numericality: { greater_than_or_equal_to: 0,
                             only_integer: true }

@@ -8,8 +8,7 @@ class AdminUser < ActiveRecord::Base
          :validatable
 
   has_many :users, dependent: :destroy
-  has_many :items, through: :admin_user_items
-  has_many :admin_user_items
+  has_many :items
   has_one :profile, dependent: :destroy
 
   validates :first_name, presence: true

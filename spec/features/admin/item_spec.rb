@@ -80,6 +80,15 @@ describe "Admin Item Actions", type: :feature do
     expect(page).to have_content("You added 10 piece(s) of Mortal Kombat X")
   end
 
+  scenario "different admins can have the same item" do
+    admin_item_create
+    click_on 'Log Out'
+    admin_login admin_user2
+    click_on 'Create a new Item'
+    when_i_fill_in_item_details
+    expect(page).to have_content('Item successfully created')
+  end
+
   def admin_item_create
     admin_login admin_user1
     click_on 'Create a new Item'
