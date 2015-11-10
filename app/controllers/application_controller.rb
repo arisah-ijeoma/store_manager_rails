@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, alert: exception.message
   end
 
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+
   private
 
   def current_user
@@ -35,6 +37,12 @@ class ApplicationController < ActionController::Base
     root_path
   end
 
+  def get_user
+    @user = current_user
+  end
+
+  # error pages
+
   def render_error_page(exception = nil)
     if exception
       logger.info "Rendering #{status_code}: #{exception.message}"
@@ -43,8 +51,8 @@ class ApplicationController < ActionController::Base
     render file: "errors/#{status_code}.html", :status => status_code, :layout => false
   end
 
-  def get_user
-    @user = current_user
+  def record_not_found
+    render "errors/404.html"
   end
 
   protected

@@ -17,6 +17,8 @@ module Admin
       redirect_to admin_root_path, alert: exception.message
     end
 
+    rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+
     private
 
     def current_admin_user
@@ -31,6 +33,12 @@ module Admin
       @current_ability ||= Ability.new(current_admin_user)
     end
 
+    def get_admin
+      @admin_user = current_admin_user
+    end
+
+    # error pages
+
     def render_admin_error_page(exception = nil)
       if exception
         logger.info "Rendering #{status_code}: #{exception.message}"
@@ -39,8 +47,8 @@ module Admin
       render file: "errors/#{status_code}.html", :status => status_code, :layout => false
     end
 
-    def get_admin
-      @admin_user = current_admin_user
+    def record_not_found
+      render "errors/404.html"
     end
 
     protected
