@@ -23,11 +23,11 @@ class ItemsController < ApplicationController
           redirect_to items_path, notice: "No sale"
         else
           redirect_to items_path,
-                      notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"
+          notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"
         end
       else
         redirect_to sell_item_path,
-                    notice: "Quantity sold should be less than the available stock"
+        notice: "Quantity sold should be less than the available stock"
       end
     else
       flash[:notice] = "Invalid Quantity"
