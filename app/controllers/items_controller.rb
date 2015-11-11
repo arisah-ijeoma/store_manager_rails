@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
       @item.quantity = @item.quantity - qty_sold
 
       if @item.save
-        if qty_sold.to_i == 0
+        if qty_sold == 0
           redirect_to items_path, notice: "No sale"
         else
           redirect_to items_path,
