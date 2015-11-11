@@ -32,7 +32,7 @@ describe "Admin Item Actions", type: :feature do
     expect(page).to have_content("Quantity sold should be less than the available stock")
   end
 
-  scenario "admin can not sell without new sale value" do
+  scenario "admin can not sell without sale value" do
     admin_item_create
     click_on 'Sell'
     click_on 'Sold'
@@ -98,6 +98,32 @@ describe "Admin Item Actions", type: :feature do
     fill_in 'Minimum Quantity', with: '5'
     click_on 'Save'
     expect(page).to have_content("Minimum Quantity should be less than quantity added")
+  end
+
+  scenario "admin can not sell in negative" do
+    admin_item_create
+    click_on 'Sell'
+    fill_in 'Quantity Sold', with: -3
+    click_on 'Sold'
+    expect(page).to have_content("Invalid Quantity")
+  end
+
+  scenario "admin can not add stock in negative" do
+    admin_item_create
+    click_on 'Edit'
+    click_on 'Add New Stock'
+    fill_in 'Add New Stock', with: -3
+    click_on 'Add Stock'
+    expect(page).to have_content("Invalid Quantity")
+  end
+
+  scenario "admin can not stock without stock value" do
+    admin_item_create
+    click_on 'Edit'
+    click_on 'Add New Stock'
+    fill_in 'Add New Stock', with: 0
+    click_on 'Add Stock'
+    expect(page).to have_content('Please add a value for the new stock')
   end
 
   def admin_item_create
