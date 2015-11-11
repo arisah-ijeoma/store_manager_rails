@@ -37,7 +37,7 @@ module Admin
         @item.quantity = @item.quantity - qty_sold
 
         if @item.save
-          if qty_sold.to_i == 0
+          if qty_sold == 0
             redirect_to admin_items_path, notice: "No sale"
           else
             redirect_to admin_items_path,
@@ -59,12 +59,16 @@ module Admin
     def update_stock
       new_stock = (params[:item][:new_stock]).to_i
 
-      if new_stock > 0
+      if new_stock >= 0
         @item.quantity = @item.quantity + new_stock
 
         if @item.save
-          redirect_to edit_admin_item_path,
-          notice: "You added #{new_stock} piece(s) of #{@item.name}"
+          if new_stock == 0
+            redirect_to edit_admin_item_path, notice: "Please add a value for the new stock"
+          else
+            redirect_to edit_admin_item_path,
+            notice: "You added #{new_stock} piece(s) of #{@item.name}"
+          end
         else
           redirect_to edit_admin_item_path
         end
