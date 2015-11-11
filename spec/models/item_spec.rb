@@ -15,14 +15,6 @@ describe Item do
   end
 
   context "invalid items" do
-    describe "minimum quantity larger than quantity" do
-      it "raises an error" do
-        expect{
-          create(:invalid_item, name: 'Doll')
-        }.to raise_error("Validation failed: Min qty should be less than quantity added")
-      end
-    end
-
     describe  "invalid characters" do
       it "raises an error" do
         expect{

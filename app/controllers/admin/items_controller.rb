@@ -13,11 +13,15 @@ module Admin
     end
 
     def create
-      @item = @admin_user.items.create(item_params)
-
-      if @item.save
-        redirect_to admin_items_path, notice: 'Item successfully created'
+      if @item.validate_min_quantity?
+        @item = @admin_user.items.create(item_params)
+        if @item.save
+          redirect_to admin_items_path, notice: 'Item successfully created'
+        else
+          render :new
+        end
       else
+        flash[:notice] = "Minimum Quantity should be less than quantity added"
         render :new
       end
     end

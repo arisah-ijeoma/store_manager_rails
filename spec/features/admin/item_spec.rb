@@ -89,6 +89,17 @@ describe "Admin Item Actions", type: :feature do
     expect(page).to have_content('Item successfully created')
   end
 
+  scenario "minimum quantity can not be higher than quantity" do
+    admin_login admin_user2
+    click_on 'Create a new Item'
+    select 'Games', from: 'Category'
+    fill_in 'Name', with: 'Mortal Kombat X'
+    fill_in 'Quantity', with: '3'
+    fill_in 'Minimum Quantity', with: '5'
+    click_on 'Save'
+    expect(page).to have_content("Minimum Quantity should be less than quantity added")
+  end
+
   def admin_item_create
     admin_login admin_user1
     click_on 'Create a new Item'

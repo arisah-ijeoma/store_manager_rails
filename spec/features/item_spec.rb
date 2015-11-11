@@ -54,6 +54,13 @@ describe 'User Item Actions', type: :feature do
     expect(page).not_to have_content("Toys for Kids")
   end
 
+  scenario "user can sell all items" do
+    click_on 'Sell'
+    fill_in 'Quantity Sold', with: 3
+    click_on 'Sold'
+    expect(page).to have_content("You just sold 3 piece(s) of Barbie Doll")
+  end
+
   def admin_creates_item
     click_on 'Create a new Item'
     select 'Toys for Kids', from: 'Category'
