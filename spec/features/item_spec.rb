@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User Item Actions', type: :feature do
+describe 'employee Item Actions', type: :feature do
   let(:admin_user) { create(:admin_user) }
   let(:admin_user2) { create(:admin_user, establishment: 'Mount Everest') }
   let(:user) { create(:user, admin_user: admin_user) }
@@ -18,47 +18,54 @@ describe 'User Item Actions', type: :feature do
     login user
   end
 
-  scenario "user can see all items" do
+  scenario "employee can see all items" do
     expect(page).to have_content("Toys for Kids")
   end
 
-  scenario "user can sell item" do
+  scenario "employee can sell item" do
     click_on 'Sell'
     fill_in 'Quantity Sold', with: 2
     click_on 'Sold'
     expect(page).to have_content("You just sold 2 piece(s) of Barbie Doll")
   end
 
-  scenario "user can not sell wrong quantity of item" do
+  scenario "employee can not sell wrong quantity of item" do
     click_on 'Sell'
     fill_in 'Quantity Sold', with: 4
     click_on 'Sold'
     expect(page).to have_content("Quantity sold should be less than the available stock")
   end
 
-  scenario "user does not input new sale value" do
+  scenario "employee does not input new sale value" do
     click_on 'Sell'
     click_on 'Sold'
     expect(page).to have_content('No sale')
   end
 
-  scenario "user with the same admin will see items" do
+  scenario "employee with the same admin will see items" do
     click_on 'Log Out'
     login user2
     expect(page).to have_content("Toys for Kids")
   end
 
-  scenario "user with different admin will not see items" do
+  scenario "employee with different admin will not see items" do
     click_on 'Log Out'
     login user3
     expect(page).not_to have_content("Toys for Kids")
   end
 
-  scenario "user can sell all items" do
+  scenario "employee can sell all items" do
     click_on 'Sell'
     fill_in 'Quantity Sold', with: 3
     click_on 'Sold'
     expect(page).to have_content("You just sold 3 piece(s) of Barbie Doll")
+  end
+
+  scenario "employee can not sell in negative" do
+    click_on 'Sell'
+    fill_in 'Quantity Sold', with: -3
+    click_on 'Sold'
+    expect(page).to have_content("Invalid Quantity")
   end
 
   def admin_creates_item
