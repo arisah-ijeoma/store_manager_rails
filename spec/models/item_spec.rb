@@ -19,6 +19,29 @@ describe Item do
         expect(item.name).to eq("My Item Name")
       end
     end
+
+    describe "captilizing does not affect acronyms" do
+      it do
+        item = create(:valid_item_name_case)
+        expect(item.brand).to eq("DMX")
+      end
+    end
+
+    context "brands" do
+      describe "no brand" do
+        it do
+          item = create(:item)
+          expect(item.brand).to eq("--")
+        end
+      end
+
+      describe "empty brand" do
+        it do
+          item = create(:valid_item_empty_brand)
+          expect(item.brand).to eq("--")
+        end
+      end
+    end
   end
 
   context "invalid items" do
