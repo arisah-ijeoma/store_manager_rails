@@ -12,6 +12,13 @@ describe Item do
         expect(item.category).to eq("Music")
       end
     end
+
+    describe "capitalizes" do
+      it do
+        item = create(:valid_item_name_case)
+        expect(item.name).to eq("My Item Name")
+      end
+    end
   end
 
   context "invalid items" do

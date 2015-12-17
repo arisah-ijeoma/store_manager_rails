@@ -1,4 +1,6 @@
 class Item < ActiveRecord::Base
+  before_save :capitalize
+
   belongs_to :admin_user
 
   validate :min_qty_is_less_than_quantity
@@ -42,5 +44,9 @@ class Item < ActiveRecord::Base
 
   def valid_values?
     quantity == nil || min_qty == nil
+  end
+
+  def capitalize
+    self.name = name.titleize
   end
 end

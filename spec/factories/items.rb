@@ -4,6 +4,12 @@ FactoryGirl.define do
     name      "Cassette"
     quantity  3
     min_qty 1
+
+    trait :name_case do
+      name    "my item name"
+    end
+
+    factory :valid_item_name_case, traits: [:name_case]
   end
 
   factory :invalid_item, class: Item do
