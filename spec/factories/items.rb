@@ -7,9 +7,15 @@ FactoryGirl.define do
 
     trait :name_case do
       name    "my item name"
+      brand   "DMX"
+    end
+
+    trait :empty_brand do
+      brand   " "
     end
 
     factory :valid_item_name_case, traits: [:name_case]
+    factory :valid_item_empty_brand, traits: [:empty_brand]
   end
 
   factory :invalid_item, class: Item do

@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  before_save :capitalize
+  before_save :capitalize, :add_brand
 
   belongs_to :admin_user
 
@@ -47,6 +47,13 @@ class Item < ActiveRecord::Base
   end
 
   def capitalize
-    self.name = name.titleize
+    self.name = name.titleize unless name == name.upcase
+    self.brand = brand.titleize unless brand == brand.upcase
+  end
+
+  def add_brand
+    if brand.blank?
+      self.brand = '--'
+    end
   end
 end
