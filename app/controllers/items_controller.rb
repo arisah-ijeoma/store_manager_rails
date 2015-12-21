@@ -2,7 +2,13 @@ class ItemsController < ApplicationController
   before_action :get_user
 
   def index
-    @items = @user.admin_user.items
+    @user_items = @user.admin_user.items
+    @items =
+        if params[:q].present?
+          @user_items.search_items(params[:q])
+        else
+          @user_items
+        end
   end
 
   def sell

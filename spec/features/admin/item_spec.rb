@@ -126,6 +126,14 @@ describe "Admin Item Actions", type: :feature do
     expect(page).to have_content('Please add a value for the new stock')
   end
 
+  scenario "admin can search for item" do
+    admin_item_create
+    click_on 'Create a new Item'
+    given_i_create_another_item
+    when_i_search_for_an_item
+    then_i_should_see_the_result
+  end
+
   def admin_item_create
     admin_login admin_user1
     click_on 'Create a new Item'
@@ -139,5 +147,22 @@ describe "Admin Item Actions", type: :feature do
     fill_in 'Quantity', with: '3'
     fill_in 'Minimum Quantity', with: '1'
     click_on 'Save'
+  end
+
+  def given_i_create_another_item
+    select 'Music', from: 'Category'
+    fill_in 'Name', with: 'Recorder'
+    fill_in 'Quantity', with: '3'
+    fill_in 'Minimum Quantity', with: '1'
+    click_on 'Save'
+  end
+
+  def when_i_search_for_an_item
+    visit admin_items_path(q: 'game')
+  end
+
+  def then_i_should_see_the_result
+    expect(page).to have_content('Mortal Kombat X')
+    expect(page).not_to have_content('Music')
   end
 end

@@ -5,7 +5,13 @@ module Admin
     load_and_authorize_resource class: "Item"
 
     def index
-      @items = @admin_user.items
+      @admin_items = @admin_user.items
+      @items =
+        if params[:q].present?
+          @admin_items.search_items(params[:q])
+        else
+          @admin_items
+        end
     end
 
     def new
