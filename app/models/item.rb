@@ -12,6 +12,14 @@ class Item < ActiveRecord::Base
   validates :quantity, :quantity_sold, :min_qty, :new_stock,
             numericality: { greater_than_or_equal_to: 0,
                             only_integer: true }
+
+  scope :search_items, -> (q) {
+    where('LOWER(category) like ? OR LOWER(brand) like ? OR LOWER(name) like ?',
+          "%#{q.downcase}%",
+          "%#{q.downcase}%",
+          "%#{q.downcase}%") # LOWER and Downcase make the query case insensitive
+  }
+
   ITEM_LIST = [
       "Books",
       "Fashion",
@@ -52,8 +60,6 @@ class Item < ActiveRecord::Base
   end
 
   def add_brand
-    if brand.blank?
-      self.brand = '--'
-    end
+    self.brand = '--' if brand.blank?
   end
 end
