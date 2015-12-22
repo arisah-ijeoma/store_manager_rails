@@ -8,8 +8,7 @@ class Item < ActiveRecord::Base
   validates :name,
             uniqueness: { case_sensitive: false,
                           message: "This item already exists",
-                          scope: :admin_user_id },
-            if: Proc.new{ |obj| obj.brand.blank? }
+                          scope: :admin_user_id }
   validates :quantity, :quantity_sold, :min_qty, :new_stock,
             numericality: { greater_than_or_equal_to: 0,
                             only_integer: true }
@@ -18,7 +17,7 @@ class Item < ActiveRecord::Base
     where('LOWER(category) like ? OR LOWER(brand) like ? OR LOWER(name) like ?',
           "%#{q.downcase}%",
           "%#{q.downcase}%",
-          "%#{q.downcase}%") # LOWER and Downcase make the query case insensitive
+          "%#{q.downcase}%") # LOWER and Downcase make the query case-insensitive
   }
 
   ITEM_LIST = [
