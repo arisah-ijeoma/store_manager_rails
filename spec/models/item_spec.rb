@@ -27,6 +27,17 @@ describe Item do
       end
     end
 
+    describe "same name different brands can exist" do
+      it do
+        item1 = create(:valid_item_name_case)
+        item2 = create(:valid_item_name_case, brand: 'Bis')
+        expect(item1.brand).to eq("DMX")
+        expect(item1.name).to eq("My Item Name")
+        expect(item2.brand).to eq("Bis")
+        expect(item2.name).to eq("My Item Name")
+      end
+    end
+
     context "brands" do
       describe "no brand" do
         it do
@@ -53,11 +64,20 @@ describe Item do
       end
     end
 
-    describe "duplicate item" do
+    describe "duplicate item name" do
       it "raises an error" do
         create(:item)
         expect{
           create(:item, name: 'cassette')
+        }.to raise_error("Validation failed: Name This item already exists")
+      end
+    end
+
+    describe "items without brands can not have the same name" do
+      it do
+        create(:item)
+        expect{
+          create(:valid_item_empty_brand)
         }.to raise_error("Validation failed: Name This item already exists")
       end
     end
