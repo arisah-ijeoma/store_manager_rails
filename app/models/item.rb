@@ -8,7 +8,8 @@ class Item < ActiveRecord::Base
   validates :name,
             uniqueness: { case_sensitive: false,
                           message: "This item already exists",
-                          scope: :admin_user_id }
+                          scope: :admin_user_id },
+            if: Proc.new{ |obj| obj.brand.blank? }
   validates :quantity, :quantity_sold, :min_qty, :new_stock,
             numericality: { greater_than_or_equal_to: 0,
                             only_integer: true }
