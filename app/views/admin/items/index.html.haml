@@ -1,6 +1,18 @@
-= form_tag [:admin, :items], method: 'get' do
-  = text_field_tag :q, params[:q],
-    placeholder: 'Search'
+.row
+  .col.m3
+    = form_tag [:admin, :items], method: 'get' do
+      = text_field_tag :q, params[:q],
+        placeholder: 'Search'
+  .col.m9
+    Filter by
+    .pull-right.sort-width
+      Sort by:
+      = link_to admin_items_path(sort_by: 'category'), title: 'Category', class: 'sort-color' do
+        %i.fa.fa-sitemap
+      = link_to admin_items_path(sort_by: 'brand'), title: 'Brand', class: 'sort-color' do
+        %i.fa.fa-university
+      = link_to admin_items_path(sort_by: 'name'), title: 'Name', class: 'sort-color' do
+        %i.fa.fa-bookmark
 %table.table.table-striped
   %thead
     %tr

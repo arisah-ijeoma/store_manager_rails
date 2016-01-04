@@ -9,6 +9,12 @@ module Admin
       @items =
         if params[:q].present?
           @admin_items.search_items(params[:q])
+        elsif params[:sort_by] == 'category'
+          Item.order(:category)
+        elsif params[:sort_by] == 'brand'
+          Item.order(:brand)
+        elsif params[:sort_by] == 'name'
+          Item.order(:name)
         else
           @admin_items
         end
