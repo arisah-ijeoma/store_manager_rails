@@ -68,6 +68,15 @@ describe 'employee Item Actions', type: :feature do
     expect(page).to have_content("Invalid Quantity")
   end
 
+  scenario "employee can search for item" do
+    click_on 'Log Out'
+    given_admin_creates_another_item
+    and_logs_out
+    when_i_log_in
+    and_search_for_an_item
+    then_i_should_see_the_result
+  end
+
   def admin_creates_item
     click_on 'Create a new Item'
     select 'Toys for Kids', from: 'Category'
@@ -75,5 +84,34 @@ describe 'employee Item Actions', type: :feature do
     fill_in 'Quantity', with: '3'
     fill_in 'Minimum Quantity', with: '1'
     click_on 'Save'
+  end
+
+  def given_admin_creates_another_item
+    visit admin_root_path
+    admin_login admin_user
+    click_on 'Create a new Item'
+    select 'Games', from: 'Category'
+    fill_in 'Name', with: 'Xbox'
+    fill_in 'Quantity', with: '5'
+    fill_in 'Minimum Quantity', with: '2'
+    click_on 'Save'
+  end
+
+  def and_logs_out
+    click_on 'Log Out'
+  end
+
+  def when_i_log_in
+    visit root_path
+    login user
+  end
+
+  def and_search_for_an_item
+    visit items_path(q: 'game')
+  end
+
+  def then_i_should_see_the_result
+    expect(page).to have_content('Xbox')
+    expect(page).not_to have_content('Doll')
   end
 end
