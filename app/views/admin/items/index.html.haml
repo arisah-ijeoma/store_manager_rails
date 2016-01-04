@@ -25,5 +25,7 @@
   %tbody
     - if @items.empty?
       %i There is no match for your search
+      %br/
+      = link_to 'View all items', admin_items_path
     = render @items
 = link_to 'Create a new Item', new_admin_item_path

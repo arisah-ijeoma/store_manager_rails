@@ -12,4 +12,6 @@
   %tbody
     - if @items.empty?
       %i There is no match for your search
+      %br/
+      = link_to 'View all items', items_path
     = render @items
