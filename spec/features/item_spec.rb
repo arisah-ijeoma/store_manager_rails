@@ -51,7 +51,7 @@ describe 'employee Item Actions', type: :feature do
   scenario "employee with different admin will not see items" do
     click_on 'Log Out'
     login user3
-    expect(page).not_to have_content("Toys for Kids")
+    expect(page).not_to have_css("table.table", text: "Toys for Kids")
   end
 
   scenario "employee can sell all items" do
@@ -75,6 +75,24 @@ describe 'employee Item Actions', type: :feature do
     when_i_log_in
     and_search_for_an_item
     then_i_should_see_the_result
+  end
+
+  scenario "employee can filter by category" do
+    click_on 'Log Out'
+    given_admin_creates_another_item
+    and_logs_out
+    when_i_log_in
+    and_filter_by_category
+    then_i_should_see_only_that_category
+  end
+
+  scenario "no items if category is not available" do
+    click_on 'Log Out'
+    given_admin_creates_another_item
+    and_logs_out
+    when_i_log_in
+    and_filter_by_an_unavailable_category
+
   end
 
   def admin_creates_item
@@ -113,5 +131,25 @@ describe 'employee Item Actions', type: :feature do
   def then_i_should_see_the_result
     expect(page).to have_content('Xbox')
     expect(page).not_to have_content('Doll')
+  end
+
+  def and_filter_by_category
+    visit items_path(filter_by: 'Toys for Kids')
+  end
+
+  def then_i_should_see_only_that_category
+    expect(page).not_to have_content("Xbox")
+    expect(page).not_to have_css("table.table", text: "Games")
+    expect(page).to have_content("Barbie Doll")
+  end
+
+  def and_filter_by_an_unavailable_category
+    visit items_path(filter_by: 'Toys for Kids')
+  end
+
+  def then_i_should_get_a_message
+    expect(page).to have_content("No item matches your search")
+    expect(page).not_to have_css("table.table", text: "Games")
+    expect(page).not_to have_css("table.table", text: "Toys for Kids")
   end
 end

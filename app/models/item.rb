@@ -21,6 +21,10 @@ class Item < ActiveRecord::Base
           "%#{q.downcase}%") # LOWER and Downcase make the query case insensitive
   }
 
+  scope :filtered_categories, -> (cat) {
+    where(category: cat)
+  }
+
   CATEGORY_LIST = [
       "Books",
       "Fashion",

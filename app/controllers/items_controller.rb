@@ -4,7 +4,11 @@ class ItemsController < ApplicationController
   def index
     @user_items = @user.admin_user.items
     @item_decorator = ItemDecorator.new(@user_items)
-    @items = @item_decorator.order_pattern(params[:sort_by], params[:q])
+    @items = if params[:filter_by].present?
+               @item_decorator.filter_items(params[:filter_by])
+             else
+               @item_decorator.order_pattern(params[:sort_by], params[:q])
+             end
   end
 
   def sell

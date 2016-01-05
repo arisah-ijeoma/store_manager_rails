@@ -44,7 +44,7 @@ describe "Admin Item Actions", type: :feature do
     click_on 'Edit'
     select 'Fashion', from: 'Category'
     click_on 'Save'
-    expect(page).not_to have_content("Music")
+    expect(page).not_to have_css("table.table", text: "Music")
     expect(page).to have_content("Fashion")
     expect(page).to have_content("'Mortal Kombat X' has been successfully updated")
   end
@@ -52,7 +52,7 @@ describe "Admin Item Actions", type: :feature do
   scenario "admin can delete item" do
     admin_item_create
     click_on 'Delete'
-    expect(page).not_to have_content("Music")
+    expect(page).not_to have_css("table.table", text: "Music")
     expect(page).to have_content("This item has been successfully deleted")
   end
 
@@ -134,6 +134,22 @@ describe "Admin Item Actions", type: :feature do
     then_i_should_see_the_result
   end
 
+  scenario "admin can filter per category" do
+    admin_item_create
+    click_on 'Create a new Item'
+    given_i_create_another_item
+    when_i_filter_by_category
+    then_i_should_see_only_that_category
+  end
+
+  scenario "no items if category is not available" do
+    admin_item_create
+    click_on 'Create a new Item'
+    given_i_create_another_item
+    when_i_filter_by_an_unavailable_category
+    then_i_should_get_a_message
+  end
+
   def admin_item_create
     admin_login admin_user1
     click_on 'Create a new Item'
@@ -163,6 +179,26 @@ describe "Admin Item Actions", type: :feature do
 
   def then_i_should_see_the_result
     expect(page).to have_content('Mortal Kombat X')
-    expect(page).not_to have_content('Music')
+    expect(page).not_to have_css("table.table", text: "Music")
+  end
+
+  def when_i_filter_by_category
+    visit admin_items_path(filter_by: 'Games')
+  end
+
+  def then_i_should_see_only_that_category
+    expect(page).not_to have_content("Recorder")
+    expect(page).not_to have_css("table.table", text: "Music")
+    expect(page).to have_content("Mortal Kombat X")
+  end
+
+  def when_i_filter_by_an_unavailable_category
+    visit admin_items_path(filter_by: 'Toys for Kids')
+  end
+
+  def then_i_should_get_a_message
+    expect(page).to have_content("No item matches your search")
+    expect(page).not_to have_css("table.table", text: "Games")
+    expect(page).not_to have_css("table.table", text: "Music")
   end
 end

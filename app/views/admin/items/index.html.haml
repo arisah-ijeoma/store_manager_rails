@@ -4,7 +4,10 @@
       = text_field_tag :q, params[:q],
         placeholder: 'Search'
   .col.m9
-    Filter by
+    = select_tag :category,
+                 options_for_select(Item::CATEGORY_LIST),
+                 include_blank: 'All Item Categories',
+                 onchange: "window.location.replace('/admin/items?filter_by='+this.value);"
     .pull-right.sort-width
       Sort by:
       = link_to admin_items_path(sort_by: 'category'), title: 'Category', class: 'sort-color' do
@@ -24,7 +27,7 @@
       %th
   %tbody
     - if @items.empty?
-      %i There is no match for your search
+      %i No item matches your search
       %br/
       = link_to 'View all items', admin_items_path
     = render @items

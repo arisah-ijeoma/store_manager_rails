@@ -1,6 +1,13 @@
-= form_tag :items, method: 'get' do
-  = text_field_tag :q, params[:q],
-    placeholder: 'Search'
+.row
+  .col.m3
+    = form_tag :items, method: 'get' do
+      = text_field_tag :q, params[:q],
+        placeholder: 'Search'
+  .col.m9
+    = select_tag :category,
+                 options_for_select(Item::CATEGORY_LIST),
+                 include_blank: 'All Item Categories',
+                 onchange: "window.location.replace('/items?filter_by='+this.value);"
 %table.table.table-striped
   %thead
     %tr
@@ -11,7 +18,7 @@
       %th
   %tbody
     - if @items.empty?
-      %i There is no match for your search
+      %i No item matches your search
       %br/
       = link_to 'View all items', items_path
     = render @items
