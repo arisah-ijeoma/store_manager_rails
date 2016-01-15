@@ -3,12 +3,12 @@ class ItemsController < ApplicationController
 
   def index
     @user_items = @user.admin_user.items
-    @items =
-        if params[:q].present?
-          @user_items.search_items(params[:q])
-        else
-          @user_items
-        end
+    @item_decorator = ItemDecorator.new(@user_items)
+    @items = if params[:filter_by].present?
+               @item_decorator.filter_items(params[:filter_by])
+             else
+               @item_decorator.order_pattern(params[:sort_by], params[:q])
+             end
   end
 
   def sell

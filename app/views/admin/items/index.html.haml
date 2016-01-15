@@ -1,6 +1,21 @@
-= form_tag [:admin, :items], method: 'get' do
-  = text_field_tag :q, params[:q],
-    placeholder: 'Search'
+.row
+  .col.m3
+    = form_tag [:admin, :items], method: 'get' do
+      = text_field_tag :q, params[:q],
+        placeholder: 'Search'
+  .col.m9
+    = select_tag :category,
+                 options_for_select(Item::CATEGORY_LIST),
+                 include_blank: 'All Item Categories',
+                 onchange: "window.location.replace('/admin/items?filter_by='+this.value);"
+    .pull-right.sort-width
+      Sort by:
+      = link_to admin_items_path(sort_by: 'category'), title: 'Category', class: 'sort-color' do
+        %i.fa.fa-sitemap
+      = link_to admin_items_path(sort_by: 'brand'), title: 'Brand', class: 'sort-color' do
+        %i.fa.fa-university
+      = link_to admin_items_path(sort_by: 'name'), title: 'Name', class: 'sort-color' do
+        %i.fa.fa-bookmark
 %table.table.table-striped
   %thead
     %tr
@@ -12,6 +27,8 @@
       %th
   %tbody
     - if @items.empty?
-      %i There is no match for your search
+      %i No item matches your search
+      %br/
+      = link_to 'View all items', admin_items_path
     = render @items
 = link_to 'Create a new Item', new_admin_item_path

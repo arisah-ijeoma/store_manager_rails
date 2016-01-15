@@ -5,7 +5,7 @@
 
 = semantic_form_for [:admin, @item] do |f|
   = f.inputs do
-    = f.input :category, as: :select, include_blank: 'Please Select', collection: Item::ITEM_LIST
+    = f.input :category, as: :select, include_blank: 'Please Select', collection: Item::CATEGORY_LIST
     = f.input :brand, placeholder: 'The brand of the item'
     = f.input :name, placeholder: 'The name of the item'
     - if @item.new_record?

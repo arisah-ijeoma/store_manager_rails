@@ -49,6 +49,9 @@ gem 'materialize-sass'
 gem 'bootstrap-material-design'
 gem 'autoprefixer-rails'
 
+# For icons
+gem 'font-awesome-sass', '~> 4.5.0'
+
 group :development, :test do
   gem 'rspec-rails', '~> 3.2.1'
   gem 'factory_girl'

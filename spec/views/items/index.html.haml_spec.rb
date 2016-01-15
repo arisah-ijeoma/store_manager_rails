@@ -9,7 +9,7 @@ describe "items/index.html.haml" do
 
     it do
       render
-      expect(rendered).to have_content("There is no match for your search")
+      expect(rendered).to have_content("No item matches your search")
     end
   end
 end
