@@ -7,11 +7,11 @@ class ItemDecorator
     if query.present?
       @items.search_items(query)
     elsif sort_by == 'category'
-      Item.order(:category)
+      @items.order(:category)
     elsif sort_by == 'brand'
-      Item.order(:brand)
+      @items.order(:brand)
     elsif sort_by == 'name'
-      Item.order(:name)
+      @items.order(:name)
     else
       @items
     end
