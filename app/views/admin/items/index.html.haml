@@ -5,8 +5,8 @@
         placeholder: 'Search'
   .col.m9
     = select_tag :category,
-                 options_for_select(Item::CATEGORY_LIST),
-                 include_blank: 'All Item Categories',
+                 options_for_select(Item::CATEGORY_LIST, selected: params[:filter_by]),
+                 include_blank: 'Item Categories',
                  onchange: "window.location.replace('/admin/items?filter_by='+this.value);"
     .pull-right.sort-width
       Sort by:
