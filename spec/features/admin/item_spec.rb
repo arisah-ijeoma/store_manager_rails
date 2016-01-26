@@ -190,6 +190,7 @@ describe "Admin Item Actions", type: :feature do
     expect(page).not_to have_content("Recorder")
     expect(page).not_to have_css("table.table", text: "Music")
     expect(page).to have_content("Mortal Kombat X")
+    expect(page).to have_select('category', selected: 'Games')
   end
 
   def when_i_filter_by_an_unavailable_category

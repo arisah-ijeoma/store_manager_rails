@@ -141,6 +141,7 @@ describe 'employee Item Actions', type: :feature do
     expect(page).not_to have_content("Xbox")
     expect(page).not_to have_css("table.table", text: "Games")
     expect(page).to have_content("Barbie Doll")
+    expect(page).to have_select('category', selected: 'Toys for Kids')
   end
 
   def and_filter_by_an_unavailable_category
