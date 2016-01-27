@@ -3,6 +3,10 @@ class ItemDecorator
     @items = items
   end
 
+  def item_search(query)
+    @items.search_items(query)
+  end
+
   def order_pattern(sort_by)
     if sort_by == 'category'
       @items.order(:category)
@@ -15,8 +19,16 @@ class ItemDecorator
     end
   end
 
-  def item_search(query)
-    @items.search_items(query)
+  def order_filtered_items(sort, filter)
+    if sort == 'category'
+      filter_items(filter).order(:category)
+    elsif sort == 'brand'
+      filter_items(filter).order(:brand)
+    elsif sort == 'name'
+      filter_items(filter).order(:name)
+    else
+      @items
+    end
   end
 
   def filter_items(cat)

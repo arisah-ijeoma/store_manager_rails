@@ -10,12 +10,14 @@
                  onchange: "window.location.replace('/admin/items?filter_by='+this.value);"
     .pull-right.sort-width
       Sort by:
-      = link_to admin_items_path(sort_by: 'category'), title: 'Category', class: 'sort-color' do
+      = link_to admin_items_path(sort_by: 'category', filter_by: params[:filter_by]), title: 'Category', class: 'sort-color' do
         %i.fa.fa-sitemap
-      = link_to admin_items_path(sort_by: 'brand'), title: 'Brand', class: 'sort-color' do
+      = link_to admin_items_path(sort_by: 'brand', filter_by: params[:filter_by]), title: 'Brand', class: 'sort-color' do
         %i.fa.fa-university
-      = link_to admin_items_path(sort_by: 'name'), title: 'Name', class: 'sort-color' do
+      = link_to admin_items_path(sort_by: 'name', filter_by: params[:filter_by]), title: 'Name', class: 'sort-color' do
         %i.fa.fa-bookmark
+- if params[:filter_by].present?
+  = link_to 'View all items', admin_items_path
 %table.table.table-striped
   %thead
     %tr
@@ -27,8 +29,7 @@
       %th
   %tbody
     - if @items.empty?
-      %i No item matches your search
-      %br/
-      = link_to 'View all items', admin_items_path
+      %br
+        %i No item matches your search
     = render @items
 = link_to 'Create a new Item', new_admin_item_path

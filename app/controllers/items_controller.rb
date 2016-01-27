@@ -7,10 +7,14 @@ class ItemsController < ApplicationController
     @items =
         if params[:q].present?
           @item_decorator.item_search(params[:q])
+        elsif params[:filter_by].present? && params[:sort_by].present?
+          @item_decorator.order_filtered_items(params[:sort_by], params[:filter_by])
         elsif params[:filter_by].present?
           @item_decorator.filter_items(params[:filter_by])
-        else
+        elsif params[:sort_by].present?
           @item_decorator.order_pattern(params[:sort_by])
+        else
+          @user_items
         end
   end
 

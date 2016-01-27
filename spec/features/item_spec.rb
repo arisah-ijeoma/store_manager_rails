@@ -86,6 +86,16 @@ describe 'employee Item Actions', type: :feature do
     then_i_should_see_only_that_category
   end
 
+  scenario "employee can sort filtered items" do
+    click_on 'Log Out'
+    given_admin_creates_another_item
+    and_logs_out
+    when_i_log_in
+    and_filter_by_category
+    click_on 'Brand'
+    then_i_should_see_only_that_category
+  end
+
   scenario "no items if category is not available" do
     click_on 'Log Out'
     given_admin_creates_another_item
@@ -142,6 +152,7 @@ describe 'employee Item Actions', type: :feature do
     expect(page).not_to have_css("table.table", text: "Games")
     expect(page).to have_content("Barbie Doll")
     expect(page).to have_select('category', selected: 'Toys for Kids')
+    expect(page).to have_content("View all items")
   end
 
   def and_filter_by_an_unavailable_category
