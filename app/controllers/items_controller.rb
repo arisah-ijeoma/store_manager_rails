@@ -4,7 +4,8 @@ class ItemsController < ApplicationController
   def index
     @user_items = @user.admin_user.items
     @item_decorator = ItemDecorator.new(@user_items)
-    @items = @item_decorator.list_items(params[:q], params[:sort_by], params[:filter_by]).order(updated_at: :desc)
+    @items = @item_decorator.list_items(params[:q], params[:sort_by], params[:filter_by])
+    @items = @items.order(updated_at: :desc) unless @items.empty?
   end
 
   def sell
