@@ -8,6 +8,7 @@ module Admin
       @admin_items = @admin_user.items
       @item_decorator = ItemDecorator.new(@admin_items)
       @items = @item_decorator.list_items(params[:q], params[:sort_by], params[:filter_by])
+      @items = @items.order(updated_at: :desc) unless @items.empty?
     end
 
     def new
