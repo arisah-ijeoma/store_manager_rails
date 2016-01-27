@@ -7,11 +7,7 @@ module Admin
     def index
       @admin_items = @admin_user.items
       @item_decorator = ItemDecorator.new(@admin_items)
-      @items = if params[:filter_by].present?
-                 @item_decorator.filter_items(params[:filter_by])
-               else
-                 @item_decorator.order_pattern(params[:sort_by], params[:q])
-               end
+      @items = @item_decorator.list_items(params[:q], params[:sort_by], params[:filter_by])
     end
 
     def new

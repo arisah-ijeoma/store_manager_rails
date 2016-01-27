@@ -142,6 +142,15 @@ describe "Admin Item Actions", type: :feature do
     then_i_should_see_only_that_category
   end
 
+  scenario "admin can sort filtered items" do
+    admin_item_create
+    click_on 'Create a new Item'
+    given_i_create_another_item
+    when_i_filter_by_category
+    click_on 'Brand'
+    then_i_should_see_only_that_category
+  end
+
   scenario "no items if category is not available" do
     admin_item_create
     click_on 'Create a new Item'
@@ -190,6 +199,8 @@ describe "Admin Item Actions", type: :feature do
     expect(page).not_to have_content("Recorder")
     expect(page).not_to have_css("table.table", text: "Music")
     expect(page).to have_content("Mortal Kombat X")
+    expect(page).to have_select('category', selected: 'Games')
+    expect(page).to have_content("View all items")
   end
 
   def when_i_filter_by_an_unavailable_category

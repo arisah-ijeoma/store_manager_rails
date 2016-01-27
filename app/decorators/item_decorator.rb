@@ -3,15 +3,45 @@ class ItemDecorator
     @items = items
   end
 
-  def order_pattern(sort_by, query)
+  def list_items(query, sort, filter)
     if query.present?
-      @items.search_items(query)
-    elsif sort_by == 'category'
-      Item.order(:category)
+      item_search(query)
+    elsif sort.present? && filter.present?
+      order_filtered_items(sort, filter)
+    elsif filter.present?
+      filter_items(filter)
+    elsif sort.present?
+      order_pattern(sort)
+    else
+      @items
+    end
+  end
+  
+  private
+
+  def item_search(query)
+    @items.search_items(query)
+  end
+
+  def order_pattern(sort_by)
+    if sort_by == 'category'
+      @items.order(:category)
     elsif sort_by == 'brand'
-      Item.order(:brand)
+      @items.order(:brand)
     elsif sort_by == 'name'
-      Item.order(:name)
+      @items.order(:name)
+    else
+      @items
+    end
+  end
+
+  def order_filtered_items(sort, filter)
+    if sort == 'category'
+      filter_items(filter).order(:category)
+    elsif sort == 'brand'
+      filter_items(filter).order(:brand)
+    elsif sort == 'name'
+      filter_items(filter).order(:name)
     else
       @items
     end
@@ -19,13 +49,11 @@ class ItemDecorator
 
   def filter_items(cat)
     if available_categories.include?(cat)
-      Item.filtered_categories(cat)
+      @items.filtered_categories(cat)
     else
       @items = []
     end
   end
-
-  private
 
   def available_categories
     categories = []
