@@ -7,7 +7,7 @@ module Admin
     def index
       @admin_items = @admin_user.items
       @item_decorator = ItemDecorator.new(@admin_items)
-      @items = @item_decorator.list_items(params[:q], params[:sort_by], params[:filter_by])
+      @items = @item_decorator.list_items(params[:q], params[:sort_by], params[:filter_by]).order(updated_at: :desc)
     end
 
     def new
