@@ -3,6 +3,22 @@ class ItemDecorator
     @items = items
   end
 
+  def list_items(query, sort, filter)
+    if query.present?
+      item_search(query)
+    elsif sort.present? && filter.present?
+      order_filtered_items(sort, filter)
+    elsif filter.present?
+      filter_items(filter)
+    elsif sort.present?
+      order_pattern(sort)
+    else
+      @items
+    end
+  end
+  
+  private
+
   def item_search(query)
     @items.search_items(query)
   end
@@ -38,8 +54,6 @@ class ItemDecorator
       @items = []
     end
   end
-
-  private
 
   def available_categories
     categories = []
