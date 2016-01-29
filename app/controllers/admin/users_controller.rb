@@ -1,5 +1,6 @@
 module Admin
   class UsersController < Admin::ApplicationController
+
     before_action :get_admin
 
     load_and_authorize_resource class: "User"

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     end
     resources :users
     resource :profile, only: [:show, :edit, :update]
+    resources :transactions, only: :index
 
     get '*a' => 'errors#show'
   end

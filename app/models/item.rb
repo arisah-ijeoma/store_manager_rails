@@ -2,6 +2,7 @@ class Item < ActiveRecord::Base
   before_save :capitalize, :add_brand
 
   belongs_to :admin_user
+  has_many :transactions
 
   validate :min_qty_is_less_than_quantity
   validates :category, presence: true

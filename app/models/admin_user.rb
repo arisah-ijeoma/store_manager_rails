@@ -7,9 +7,10 @@ class AdminUser < ActiveRecord::Base
          :trackable,
          :validatable
 
+  has_one :profile, dependent: :destroy
   has_many :users, dependent: :destroy
   has_many :items
-  has_one :profile, dependent: :destroy
+  has_many :transactions
 
   validates :first_name, presence: true
   validates :last_name, presence: true

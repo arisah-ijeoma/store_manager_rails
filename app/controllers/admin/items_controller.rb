@@ -1,5 +1,6 @@
 module Admin
   class ItemsController < Admin::ApplicationController
+
     before_action :get_admin
 
     load_and_authorize_resource class: "Item"
@@ -33,6 +34,7 @@ module Admin
     end
 
     def update_sale
+      transactions = []
       qty_sold = (params[:item][:quantity_sold]).to_i
 
       if qty_sold >= 0
@@ -40,6 +42,9 @@ module Admin
         @item.quantity = @item.quantity - qty_sold
 
         if @item.save
+
+          transactions << Transaction.create(admin_user: @admin_user, item: @item)
+
           if qty_sold == 0
             redirect_to admin_items_path, notice: "No sale"
           else
@@ -67,7 +72,7 @@ module Admin
 
         if @item.save
           if new_stock == 0
-            redirect_to edit_admin_item_path, notice: "Please add a value for the new stock"
+            redirect_to add_stock_admin_item_path, notice: "Please add a value for the new stock"
           else
             redirect_to edit_admin_item_path,
             notice: "You added #{new_stock} piece(s) of #{@item.name}"
