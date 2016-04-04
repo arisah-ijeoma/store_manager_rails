@@ -28,7 +28,7 @@
       %th Minimum Quantity
       %th
   %tbody
-    - if @items.empty?
+    - if (params[:sort_by].present? || params[:filter_by].present?) && @items.empty?
       %br
         %i No item matches your search
     = render @items
