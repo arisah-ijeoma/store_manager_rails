@@ -41,16 +41,15 @@ module Admin
 
         @item.quantity = @item.quantity - qty_sold
 
-        if @item.save
+        if @item.save && qty_sold == 0
 
+          redirect_to admin_items_path, notice: "No sales made"
+
+        elsif @item.save
           transactions << Transaction.create(admin_user: @admin_user, item: @item)
 
-          if qty_sold == 0
-            redirect_to admin_items_path, notice: "No sales made"
-          else
-            redirect_to admin_items_path,
-            notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"
-          end
+          redirect_to admin_items_path,
+          notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"
         else
           redirect_to sell_admin_item_path,
           notice: "Quantity sold should be less than the available stock"

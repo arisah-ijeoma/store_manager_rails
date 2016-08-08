@@ -22,19 +22,18 @@ class ItemsController < ApplicationController
 
       @item.quantity = @item.quantity - qty_sold
 
-      if @item.save
+      if @item.save && qty_sold == 0
 
+        redirect_to items_path, notice: "No sales made"
+
+      elsif @item.save
         transactions << Transaction.create(admin_user: @user.admin_user, user: @user, item: @item)
 
-        if qty_sold == 0
-          redirect_to items_path, notice: "No sales made"
-        else
-          redirect_to items_path,
-          notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"
-        end
+        redirect_to items_path,
+                    notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"
       else
         redirect_to sell_item_path,
-        notice: "Quantity sold should be less than the available stock"
+                    notice: "Quantity sold should be less than the available stock"
       end
     else
       flash[:alert] = "Invalid Quantity"

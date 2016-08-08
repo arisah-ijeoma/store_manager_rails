@@ -76,6 +76,7 @@ group :test do
   gem 'capybara'
   gem 'byebug'
   gem 'database_cleaner'
+  gem 'simplecov', require: false
 end
 
 gem 'rails_12factor', group: :production
