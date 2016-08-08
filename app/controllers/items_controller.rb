@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
         transactions << Transaction.create(admin_user: @user.admin_user, user: @user, item: @item)
 
         if qty_sold == 0
-          redirect_to items_path, notice: "No sale"
+          redirect_to items_path, notice: "No sales made"
         else
           redirect_to items_path,
           notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"
@@ -37,7 +37,7 @@ class ItemsController < ApplicationController
         notice: "Quantity sold should be less than the available stock"
       end
     else
-      flash[:notice] = "Invalid Quantity"
+      flash[:alert] = "Invalid Quantity"
       render :sell
     end
   end

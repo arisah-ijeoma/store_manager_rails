@@ -36,7 +36,7 @@ describe "Admin Item Actions", type: :feature do
     admin_item_create
     click_on 'Sell'
     click_on 'Sold'
-    expect(page).to have_content('No sale')
+    expect(page).to have_content('No sales made')
   end
 
   scenario "admin can update item" do
@@ -117,7 +117,7 @@ describe "Admin Item Actions", type: :feature do
     expect(page).to have_content("Invalid Quantity")
   end
 
-  scenario "admin can not stock without stock value" do
+  scenario "admin can not add stock without stock value" do
     admin_item_create
     click_on 'Edit'
     click_on 'Add New Stock'

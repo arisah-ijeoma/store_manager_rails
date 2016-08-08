@@ -46,7 +46,7 @@ module Admin
           transactions << Transaction.create(admin_user: @admin_user, item: @item)
 
           if qty_sold == 0
-            redirect_to admin_items_path, notice: "No sale"
+            redirect_to admin_items_path, notice: "No sales made"
           else
             redirect_to admin_items_path,
             notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"
@@ -56,7 +56,7 @@ module Admin
           notice: "Quantity sold should be less than the available stock"
         end
       else
-        flash[:notice] = "Invalid Quantity"
+        flash[:alert] = "Invalid Quantity"
         render :sell
       end
     end
@@ -107,7 +107,16 @@ module Admin
     private
 
     def item_params
-      params.require(:item).permit(:category, :name, :quantity, :min_qty, :quantity_sold, :new_stock, :brand)
+      params.require(:item).permit(:category,
+                                   :name,
+                                   :quantity,
+                                   :min_qty,
+                                   :quantity_sold,
+                                   :new_stock,
+                                   :brand,
+                                   :initial_qty,
+                                   :sold_qty,
+                                   :added_qty)
     end
   end
 end
