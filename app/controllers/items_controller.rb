@@ -13,7 +13,6 @@ class ItemsController < ApplicationController
   end
 
   def update_sale
-    transactions = []
     @item = Item.find(params[:id])
 
     qty_sold = (params[:item][:quantity_sold]).to_i
@@ -27,7 +26,7 @@ class ItemsController < ApplicationController
         redirect_to items_path, notice: "No sales made"
 
       elsif @item.save
-        transactions << Transaction.create(admin_user: @user.admin_user, user: @user, item: @item)
+        Transaction.create(admin_user: @user.admin_user, user: @user, item: @item, quantity_sold: qty_sold)
 
         redirect_to items_path,
                     notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"

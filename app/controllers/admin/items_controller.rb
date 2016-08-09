@@ -34,7 +34,6 @@ module Admin
     end
 
     def update_sale
-      transactions = []
       qty_sold = (params[:item][:quantity_sold]).to_i
 
       if qty_sold >= 0
@@ -46,7 +45,7 @@ module Admin
           redirect_to admin_items_path, notice: "No sales made"
 
         elsif @item.save
-          transactions << Transaction.create(admin_user: @admin_user, item: @item)
+          Transaction.create(admin_user: @admin_user, item: @item, quantity_sold: qty_sold)
 
           redirect_to admin_items_path,
           notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"
@@ -114,7 +113,6 @@ module Admin
                                    :new_stock,
                                    :brand,
                                    :initial_qty,
-                                   :sold_qty,
                                    :added_qty)
     end
   end

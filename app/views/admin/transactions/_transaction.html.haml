@@ -3,5 +3,6 @@
   %td= transaction.item.category
   %td= transaction.item.brand
   %td= transaction.item.name
-  %td= transaction.item.quantity
+  %td= transaction.quantity_sold
+  %td= transaction.item.initial_qty
   %td= transaction.item.updated_at.strftime("%H:%M %p")
