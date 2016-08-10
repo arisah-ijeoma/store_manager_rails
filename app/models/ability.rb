@@ -13,7 +13,6 @@ class Ability
     else
       can [:sell, :read], Item
       can :update, User
-      can :read, Transaction
     end
   end
 end

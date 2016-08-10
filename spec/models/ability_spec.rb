@@ -66,10 +66,6 @@ describe Ability do
       it "cannot manage transactions" do
         expect(ability.can?(:manage, Transaction)).to be false
       end
-
-      it "can read transactions" do
-        expect(ability.can?(:read, Transaction)).to be true
-      end
     end
   end
 end

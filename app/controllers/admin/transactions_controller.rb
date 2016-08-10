@@ -6,6 +6,10 @@ module Admin
     before_action :get_admin
 
     def index
+      @transactions = Transaction.where(admin_user: @admin_user).order(updated_at: :desc)
+    end
+
+    def sales_today
       @transactions = Transaction.where(admin_user: @admin_user).daily.order(updated_at: :desc)
     end
   end
