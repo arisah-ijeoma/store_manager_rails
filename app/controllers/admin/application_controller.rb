@@ -19,6 +19,28 @@ module Admin
 
     rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
 
+    protected
+
+    def layout_by_resource_admin
+      if devise_controller?
+        "devise"
+      else
+        "admin"
+      end
+    end
+
+    def status_code
+      params[:code] || 500
+    end
+
+    def authenticate_admin_user!
+      if current_user
+        redirect_to root_path, notice: "You are not authorized to view this page"
+      else
+        super
+      end
+    end
+
     private
 
     def current_admin_user
@@ -49,28 +71,6 @@ module Admin
 
     def record_not_found
       render "errors/404.html"
-    end
-
-    protected
-
-    def layout_by_resource_admin
-      if devise_controller?
-        "devise"
-      else
-        "admin"
-      end
-    end
-
-    def status_code
-      params[:code] || 500
-    end
-
-    def authenticate_admin_user!
-      if current_user
-        redirect_to root_path, notice: "You are not authorized to view this page"
-      else
-        super
-      end
     end
   end
 end

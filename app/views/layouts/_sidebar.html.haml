@@ -6,3 +6,6 @@
   = link_to "View All Transactions", admin_transactions_path
 %p
   = link_to "View Today's Transactions", sales_today_admin_transactions_path
+- if current_admin_user.role == 'super'
+  %p
+    = link_to "Sidekiq Jobs", admin_sidekiq_web_path, target: 'blank'

@@ -5,7 +5,10 @@ describe "Transactions", type: :feature do
   let(:employee) { create(:user, first_name: 'Angel', admin_user: admin) }
   let(:employee_2) { create(:user, first_name: 'Mia', admin_user: admin) }
   let!(:item) { create(:item, name: 'Fish Fillets', admin_user: admin) }
-  let!(:old_transaction) { create(:transaction, admin_user: admin, user: employee_2, updated_at: 'Mon, 8 Aug 2016 18:27:52 UTC +00:00') }
+  let!(:old_transaction) { create(:transaction,
+                                  admin_user: admin,
+                                  user: employee_2,
+                                  updated_at: 'Mon, 8 Aug 2016 18:27:52 UTC +00:00') }
 
   scenario "quantity sold is shown for seller" do
     who_sold_what

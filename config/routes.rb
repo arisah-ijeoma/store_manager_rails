@@ -1,8 +1,14 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'sessions' }
   devise_for :admin_users , controllers: { sessions: "admin/sessions" }
 
   namespace :admin do
+    authenticate :admin_user, lambda { |a| a.role == 'super' } do
+      mount Sidekiq::Web, at: '/sidekiq'
+    end
+
     root 'items#index'
     resources :items, except: :show do
       member do
