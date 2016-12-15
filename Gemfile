@@ -28,7 +28,7 @@ gem 'formtastic', '~> 3.0'
 
 # For user authentication
 gem 'devise'
-gem 'cancan'
+gem 'cancancan'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
