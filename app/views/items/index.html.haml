@@ -16,8 +16,9 @@
       %i.fa.fa-university
     = link_to items_path(sort_by: 'name', filter_by: params[:filter_by]), title: 'Name', class: 'sort-color' do
       %i.fa.fa-bookmark
-- if params[:filter_by].present?
-  = link_to 'View all items', items_path
+- if item_queries(params[:filter_by], params[:q], params[:sort_by])
+  = link_to 'View all items', items_path, class: 'pull-left'
+  = link_to 'Clear Query', items_path, class: 'pull-right clear-query'
 %table.table.table-striped
   %thead
     %tr
@@ -27,7 +28,7 @@
       %th Quantity of Items Remaining
       %th
   %tbody
-    - if (params[:sort_by].present? || params[:filter_by].present?) && @items.empty?
+    - if @items.empty?
       %br
         %i No item matches your search
     = render @items
