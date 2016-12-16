@@ -6,4 +6,8 @@ module ApplicationHelper
       else name
     end
   end
+
+  def item_queries(filter, query, sort)
+    filter.present? || query.present? || sort.present?
+  end
 end
