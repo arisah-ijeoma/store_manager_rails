@@ -1,13 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
-  # a hack till cancancan starts playing well with strong parameters
-  before_action do
-    resource = controller_name.singularize.to_sym
-    method = "#{resource}_params"
-    params[resource] &&= send(method) if respond_to?(method, true)
-  end
-
   layout :layout_by_resource
 
   rescue_from CanCan::AccessDenied do |exception|

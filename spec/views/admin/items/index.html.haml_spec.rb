@@ -4,7 +4,8 @@ describe "admin/items/index.html.haml" do
 
   describe "search returns no result" do
     before do
-      assign(:items,[])
+      allow(view).to receive(:params).and_return({sort_by: "me"})
+      assign(:items, [])
     end
 
     it do

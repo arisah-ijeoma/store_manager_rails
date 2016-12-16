@@ -1,20 +1,31 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :users, controllers: { sessions: 'sessions' }
   devise_for :admin_users , controllers: { sessions: "admin/sessions" }
 
   namespace :admin do
+    authenticate :admin_user, lambda { |a| a.role == 'super' } do
+      mount Sidekiq::Web, at: '/sidekiq'
+    end
+
     root 'items#index'
     resources :items, except: :show do
-      get :sell, on: :member
-      post :update_sale, on: :member
-      get :add_stock, on: :member
-      post :update_stock, on: :member
+      member do
+        get :sell
+        post :update_sale
+        get :add_stock
+        post :update_stock
+      end
     end
     resources :admin_users do
       get :admin_employees, on: :member
     end
     resources :users
     resource :profile, only: [:show, :edit, :update]
+    resources :transactions, only: :index do
+      get :sales_today, on: :collection
+    end
 
     get '*a' => 'errors#show'
   end

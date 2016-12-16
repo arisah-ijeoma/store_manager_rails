@@ -1,8 +1,7 @@
 module Admin
   class ProfilesController < Admin::ApplicationController
 
-    before_action :get_admin
-    before_action :set_admin_profile
+    before_action :get_admin, :set_admin_profile
 
     def show
     end

@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
 
   belongs_to :admin_user
   has_one :profile, dependent: :destroy
+  has_many :transactions
 
   validates :first_name, presence: true
   validates :last_name, presence: true

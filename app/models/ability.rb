@@ -8,6 +8,7 @@ class Ability
       else
         can :manage, Item
         can :manage, User
+        can :manage, Transaction
       end
     else
       can [:sell, :read], Item

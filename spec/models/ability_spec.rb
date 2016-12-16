@@ -27,6 +27,10 @@ describe Ability do
       it "manages users" do
         expect(ability.can?(:manage, User)).to be true
       end
+
+      it "manages transactions" do
+        expect(ability.can?(:manage, Transaction)).to be true
+      end
     end
   end
 
@@ -57,6 +61,10 @@ describe Ability do
 
       it "cannot create himself" do
         expect(ability.can?(:create, User)).to be false
+      end
+
+      it "cannot manage transactions" do
+        expect(ability.can?(:manage, Transaction)).to be false
       end
     end
   end

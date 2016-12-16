@@ -2,6 +2,7 @@ class Item < ActiveRecord::Base
   before_save :capitalize, :add_brand
 
   belongs_to :admin_user
+  has_many :transactions
 
   validate :min_qty_is_less_than_quantity
   validates :category, presence: true
@@ -15,9 +16,7 @@ class Item < ActiveRecord::Base
 
   scope :search_items, -> (q) {
     where('LOWER(category) like ? OR LOWER(brand) like ? OR LOWER(name) like ?',
-          "%#{q.downcase}%",
-          "%#{q.downcase}%",
-          "%#{q.downcase}%") # LOWER and Downcase make the query case-insensitive
+          *(["#{q.downcase}%"] * 3)) # LOWER and Downcase make the query case-insensitive
   }
 
   scope :filtered_categories, -> (cat) {

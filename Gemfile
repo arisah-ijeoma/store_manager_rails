@@ -28,7 +28,7 @@ gem 'formtastic', '~> 3.0'
 
 # For user authentication
 gem 'devise'
-gem 'cancan'
+gem 'cancancan'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -58,6 +58,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Read more: https://github.com/rails/spring
 gem 'spring', group: :development
 
+# background jobs
+gem 'sidekiq'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
@@ -76,6 +79,7 @@ group :test do
   gem 'capybara'
   gem 'byebug'
   gem 'database_cleaner'
+  gem 'simplecov', require: false
 end
 
 gem 'rails_12factor', group: :production

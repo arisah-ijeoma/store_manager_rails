@@ -1,5 +1,6 @@
 module Admin
   class ItemsController < Admin::ApplicationController
+
     before_action :get_admin
 
     load_and_authorize_resource class: "Item"
@@ -36,22 +37,20 @@ module Admin
       qty_sold = (params[:item][:quantity_sold]).to_i
 
       if qty_sold >= 0
-
         @item.quantity = @item.quantity - qty_sold
 
-        if @item.save
-          if qty_sold == 0
-            redirect_to admin_items_path, notice: "No sale"
-          else
-            redirect_to admin_items_path,
-            notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"
-          end
+        if @item.save && qty_sold == 0
+          redirect_to admin_items_path, notice: "No sales made"
+        elsif @item.save
+          Transaction.create(admin_user: @admin_user, item: @item, quantity_sold: qty_sold)
+          redirect_to admin_items_path,
+          notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"
         else
           redirect_to sell_admin_item_path,
           notice: "Quantity sold should be less than the available stock"
         end
       else
-        flash[:notice] = "Invalid Quantity"
+        flash[:alert] = "Invalid Quantity"
         render :sell
       end
     end
@@ -67,7 +66,7 @@ module Admin
 
         if @item.save
           if new_stock == 0
-            redirect_to edit_admin_item_path, notice: "Please add a value for the new stock"
+            redirect_to add_stock_admin_item_path, notice: "Please add a value for the new stock"
           else
             redirect_to edit_admin_item_path,
             notice: "You added #{new_stock} piece(s) of #{@item.name}"
@@ -102,7 +101,15 @@ module Admin
     private
 
     def item_params
-      params.require(:item).permit(:category, :name, :quantity, :min_qty, :quantity_sold, :new_stock, :brand)
+      params.require(:item).permit(:category,
+                                   :name,
+                                   :quantity,
+                                   :min_qty,
+                                   :quantity_sold,
+                                   :new_stock,
+                                   :brand,
+                                   :initial_qty,
+                                   :added_qty)
     end
   end
 end

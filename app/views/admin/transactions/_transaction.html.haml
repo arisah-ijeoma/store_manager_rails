@@ -1,0 +1,10 @@
+= content_tag_for :tr, transaction do
+  %td= transaction.user.try(:full_name).nil? ? transaction.admin_user.admin_full_name : transaction.user.try(:full_name)
+  %td= transaction.item.category
+  %td= transaction.item.brand
+  %td= transaction.item.name
+  %td= transaction.quantity_sold
+  %td= transaction.item.initial_qty
+  - if action_name == 'index'
+    %td= transaction.item.updated_at.strftime("%d-%m-%Y")
+  %td= transaction.item.updated_at.strftime("%H:%M %p")

@@ -39,7 +39,7 @@ describe 'employee Item Actions', type: :feature do
   scenario "employee does not input new sale value" do
     click_on 'Sell'
     click_on 'Sold'
-    expect(page).to have_content('No sale')
+    expect(page).to have_content('No sales made')
   end
 
   scenario "employee with the same admin will see items" do

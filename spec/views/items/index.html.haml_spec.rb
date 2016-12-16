@@ -4,6 +4,7 @@ describe "items/index.html.haml" do
 
   describe "search returns no result" do
     before do
+      allow(view).to receive(:params).and_return({filter_by: "me"})
       assign(:items,[])
     end
 

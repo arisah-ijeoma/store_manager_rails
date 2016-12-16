@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151217100740) do
+ActiveRecord::Schema.define(version: 20160809112936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 20151217100740) do
     t.integer  "new_stock",     default: 0,  null: false
     t.integer  "admin_user_id"
     t.string   "brand",         default: "", null: false
+    t.integer  "initial_qty",   default: 0,  null: false
+    t.integer  "added_qty",     default: 0,  null: false
   end
 
   add_index "items", ["admin_user_id"], name: "index_items_on_admin_user_id", using: :btree
@@ -65,6 +67,15 @@ ActiveRecord::Schema.define(version: 20151217100740) do
 
   add_index "profiles", ["admin_user_id"], name: "index_profiles_on_admin_user_id", using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.integer  "admin_user_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "quantity_sold", default: 0, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

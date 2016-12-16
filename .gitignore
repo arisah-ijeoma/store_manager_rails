@@ -17,3 +17,5 @@
 .idea/
 application.yml
 db/seeds.rb
+coverage/
+logfile
