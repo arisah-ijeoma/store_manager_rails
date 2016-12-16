@@ -37,16 +37,12 @@ module Admin
       qty_sold = (params[:item][:quantity_sold]).to_i
 
       if qty_sold >= 0
-
         @item.quantity = @item.quantity - qty_sold
 
         if @item.save && qty_sold == 0
-
           redirect_to admin_items_path, notice: "No sales made"
-
         elsif @item.save
           Transaction.create(admin_user: @admin_user, item: @item, quantity_sold: qty_sold)
-
           redirect_to admin_items_path,
           notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"
         else

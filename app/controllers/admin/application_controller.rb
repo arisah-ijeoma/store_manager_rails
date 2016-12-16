@@ -22,11 +22,7 @@ module Admin
     protected
 
     def layout_by_resource_admin
-      if devise_controller?
-        "devise"
-      else
-        "admin"
-      end
+      devise_controller? ? "devise" : "admin"
     end
 
     def status_code
