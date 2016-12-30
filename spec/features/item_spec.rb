@@ -77,6 +77,15 @@ describe 'employee Item Actions', type: :feature do
     then_i_should_see_the_result
   end
 
+  scenario "employee can search for item with partial string" do
+    click_on 'Log Out'
+    given_admin_creates_another_item
+    and_logs_out
+    when_i_log_in
+    and_search_for_an_item_partially
+    then_i_should_see_the_result
+  end
+
   scenario "employee can filter by category" do
     click_on 'Log Out'
     given_admin_creates_another_item
@@ -136,6 +145,10 @@ describe 'employee Item Actions', type: :feature do
 
   def and_search_for_an_item
     visit items_path(q: 'game')
+  end
+
+  def and_search_for_an_item_partially
+    visit items_path(q: 'me')
   end
 
   def then_i_should_see_the_result

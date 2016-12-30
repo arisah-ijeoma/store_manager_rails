@@ -16,7 +16,7 @@ class Item < ActiveRecord::Base
 
   scope :search_items, -> (q) {
     where('LOWER(category) like ? OR LOWER(brand) like ? OR LOWER(name) like ?',
-          *(["#{q.downcase}%"] * 3)) # LOWER and Downcase make the query case-insensitive
+          *(["%#{q.downcase}%"] * 3)) # LOWER and Downcase make the query case-insensitive
   }
 
   scope :filtered_categories, -> (cat) {
