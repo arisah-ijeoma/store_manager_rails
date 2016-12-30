@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
          :recoverable,
          :rememberable,
          :trackable,
-         :validatable
+         :validatable,
+         :timeoutable
 
   belongs_to :admin_user
   has_one :profile, dependent: :destroy
