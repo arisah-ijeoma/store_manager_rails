@@ -36,7 +36,9 @@ class ItemDecorator
   end
 
   def order_filtered_items(sort, filter)
-    if sort == 'category'
+    if filter_items(filter).empty?
+      @items = []
+    elsif sort == 'category'
       filter_items(filter).order(:category)
     elsif sort == 'brand'
       filter_items(filter).order(:brand)

@@ -159,6 +159,15 @@ describe "Admin Item Actions", type: :feature do
     then_i_should_see_only_that_category
   end
 
+  scenario "admin cannot sort empty filtered items" do
+    admin_item_create
+    click_on 'Create a new Item'
+    given_i_create_another_item
+    when_i_filter_by_nonexistent_category
+    click_on 'Brand'
+    then_i_should_not_see_an_error
+  end
+
   scenario "no items if category is not available" do
     admin_item_create
     click_on 'Create a new Item'
@@ -207,6 +216,10 @@ describe "Admin Item Actions", type: :feature do
     visit admin_items_path(filter_by: 'Games')
   end
 
+  def when_i_filter_by_nonexistent_category
+    visit admin_items_path(filter_by: 'Toys for Kids')
+  end
+
   def then_i_should_see_only_that_category
     expect(page).not_to have_content("Recorder")
     expect(page).not_to have_css("table.table", text: "Music")
@@ -215,8 +228,12 @@ describe "Admin Item Actions", type: :feature do
     expect(page).to have_content("View all items")
   end
 
+  def then_i_should_not_see_an_error
+    expect(page).to have_content('No item matches your search')
+  end
+
   def when_i_filter_by_an_unavailable_category
-    visit admin_items_path(filter_by: 'Toys for Kids')
+    visit admin_items_path(filter_by: 'Electronics')
   end
 
   def then_i_should_get_a_message

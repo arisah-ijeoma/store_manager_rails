@@ -105,6 +105,16 @@ describe 'employee Item Actions', type: :feature do
     then_i_should_see_only_that_category
   end
 
+  scenario "employee cannot sort empty filtered items" do
+    click_on 'Log Out'
+    given_admin_creates_another_item
+    and_logs_out
+    when_i_log_in
+    and_i_filter_by_nonexistent_category
+    click_on 'Brand'
+    then_i_should_not_see_an_error
+  end
+
   scenario "no items if category is not available" do
     click_on 'Log Out'
     given_admin_creates_another_item
@@ -160,12 +170,20 @@ describe 'employee Item Actions', type: :feature do
     visit items_path(filter_by: 'Toys for Kids')
   end
 
+  def and_i_filter_by_nonexistent_category
+    visit items_path(filter_by: 'Electronics')
+  end
+
   def then_i_should_see_only_that_category
     expect(page).not_to have_content("Xbox")
     expect(page).not_to have_css("table.table", text: "Games")
     expect(page).to have_content("Barbie Doll")
     expect(page).to have_select('category', selected: 'Toys for Kids')
     expect(page).to have_content("View all items")
+  end
+
+  def then_i_should_not_see_an_error
+    expect(page).to have_content('No item matches your search')
   end
 
   def and_filter_by_an_unavailable_category
