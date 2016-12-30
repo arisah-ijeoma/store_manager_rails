@@ -134,6 +134,14 @@ describe "Admin Item Actions", type: :feature do
     then_i_should_see_the_result
   end
 
+  scenario "admin can search for item with partial string" do
+    admin_item_create
+    click_on 'Create a new Item'
+    given_i_create_another_item
+    when_i_search_for_an_item
+    then_i_should_see_the_result
+  end
+
   scenario "admin can filter per category" do
     admin_item_create
     click_on 'Create a new Item'
@@ -184,6 +192,10 @@ describe "Admin Item Actions", type: :feature do
 
   def when_i_search_for_an_item
     visit admin_items_path(q: 'game')
+  end
+
+  def when_i_search_for_an_item_partially
+    visit admin_items_path(q: 'ga')
   end
 
   def then_i_should_see_the_result
