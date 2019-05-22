@@ -1,4 +1,4 @@
-class AddMobileNumberToProfiles < ActiveRecord::Migration
+class AddMobileNumberToProfiles < ActiveRecord::Migration[5.1]
   def change
     add_column :profiles, :mobile_number, :string
   end

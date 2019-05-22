@@ -1,4 +1,4 @@
-class AddMinQtyToItem < ActiveRecord::Migration
+class AddMinQtyToItem < ActiveRecord::Migration[5.1]
   def change
     add_column :items, :min_qty, :integer, null: false
   end

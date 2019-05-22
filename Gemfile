@@ -1,20 +1,22 @@
 source 'https://rubygems.org'
 
+ruby '2.5.1'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.3'
+gem 'rails', '~> 5.2.3'
 
 # Use pg as the database for Active Record
-gem 'pg'
+gem 'pg', '>= 0.18', '< 2.0'
 
 # Use SCSS for stylesheets
 gem 'sass'
 gem 'sass-rails', '~> 5.0'
 
+# Use Puma as the app server
+gem 'puma', '~> 3.11'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
-
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
 
 # Template
 gem 'haml'
@@ -38,7 +40,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.5'
 
 # Start and stop postgre
 gem 'launchy'
@@ -47,6 +49,9 @@ gem 'launchy'
 gem 'materialize-sass'
 gem 'bootstrap-material-design'
 gem 'autoprefixer-rails'
+
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', '>= 1.1.0', require: false
 
 # For icons
 gem 'font-awesome-sass', '~> 4.5.0'
@@ -65,7 +70,7 @@ gem 'sidekiq'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.2.1'
+  gem 'rspec-rails', '~> 3.8'
   gem 'factory_girl'
   gem 'factory_girl_rails'
   gem 'faker'
@@ -77,10 +82,8 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'byebug'
   gem 'database_cleaner'
   gem 'simplecov', require: false
 end
 
 gem 'rails_12factor', group: :production
-ruby "2.2.1"

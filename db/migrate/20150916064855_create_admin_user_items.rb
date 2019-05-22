@@ -1,4 +1,4 @@
-class CreateAdminUserItems < ActiveRecord::Migration
+class CreateAdminUserItems < ActiveRecord::Migration[5.1]
   def change
     create_table :admin_user_items do |t|
       t.references :admin_user, index: true
