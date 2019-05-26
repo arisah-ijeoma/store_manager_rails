@@ -1,10 +1,7 @@
 require 'rails_helper'
 
-describe User do
+describe User, type: :model do
   let(:user) { create(:user) }
-  context "associations" do
-    it {is_expected.to belong_to :admin_user}
-  end
 
   describe "valid user" do
     it "has a password" do

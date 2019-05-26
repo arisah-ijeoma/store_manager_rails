@@ -1,10 +1,6 @@
 require 'rails_helper'
 
-describe Item do
-  context "associations" do
-    it {is_expected.to belong_to :admin_user}
-  end
-
+describe Item, type: :model do
   context "valid items" do
     describe "has a category" do
       it do

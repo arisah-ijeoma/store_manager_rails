@@ -1,10 +1,6 @@
 require 'rails_helper'
 
-describe AdminUser do
-  context "associations" do
-    it {is_expected.to have_many :users}
-  end
-
+describe AdminUser, type: :model do
   context "super admin" do
     describe "valid admin user" do
       it "has a password" do
