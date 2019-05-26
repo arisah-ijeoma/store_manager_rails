@@ -60,7 +60,7 @@ RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!
   config.include FeatureHelper, type: :feature
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
   config.include Devise::TestHelpers, type: :view
 

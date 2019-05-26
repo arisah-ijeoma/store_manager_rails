@@ -1,17 +1,17 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :item, class: Item do
-    category  "Music"
-    name      "Cassette"
-    quantity  3
-    min_qty 1
+    category { 'Music' }
+    name { 'Cassette' }
+    quantity { 3 }
+    min_qty { 1 }
 
     trait :name_case do
-      name    "my item name"
-      brand   "DMX"
+      name { 'my item name' }
+      brand { 'DMX' }
     end
 
     trait :empty_brand do
-      brand   " "
+      brand { '' }
     end
 
     factory :valid_item_name_case, traits: [:name_case]
@@ -19,14 +19,14 @@ FactoryGirl.define do
   end
 
   factory :invalid_item, class: Item do
-    category  "Music"
-    name      "Cassette"
-    quantity  1
-    min_qty  3
+    category  { 'Music' }
+    name      { 'Cassette' }
+    quantity  { 1 }
+    min_qty  { 3 }
 
     trait :invalid_value do
-      quantity '3e'
-      min_qty 2
+      quantity { '3e' }
+      min_qty { 2 }
     end
 
     factory :invalid_item_value, traits: [:invalid_value]
