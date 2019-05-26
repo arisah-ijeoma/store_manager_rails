@@ -139,7 +139,7 @@ describe "Admin User Actions", type: :feature do
     end
 
     def then_i_should_not_be_logged_in
-      expect(page).to have_content("Invalid email or password")
+      expect(page).to have_content("Invalid Email or password")
     end
 
     def and_log_in_with_new_details
@@ -285,7 +285,7 @@ describe "Admin User Actions", type: :feature do
     end
 
     def then_i_should_not_have_access
-      expect(page).to have_content("Invalid email or password")
+      expect(page).to have_content("Invalid Email or password")
     end
 
     def and_log_in_as_the_updated_admin

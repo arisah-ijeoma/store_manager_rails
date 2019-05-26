@@ -1,4 +1,4 @@
-= content_tag_for :tr, transaction do
+= tag.tr transaction do
   %td= transaction.user.try(:full_name).nil? ? transaction.admin_user.admin_full_name : transaction.user.try(:full_name)
   %td= transaction.item.category
   %td= transaction.item.brand

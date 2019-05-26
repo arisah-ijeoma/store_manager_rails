@@ -1,4 +1,4 @@
-= content_tag_for :tr, user do
+= tag.tr user do
   %td
     = link_to user.email, admin_user_path(user)
   %td= user.full_name
