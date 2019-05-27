@@ -7,9 +7,10 @@ class Item < ActiveRecord::Base
   validate :min_qty_is_not_zero
   validates :category, presence: true
   validates :name,
-            uniqueness: { case_sensitive: false,
-                          message: "This item already exists",
-                          scope: :admin_user_id }
+    presence: true,
+    uniqueness: { case_sensitive: false,
+                  message: "This item already exists",
+                  scope: :admin_user_id }
   validates :quantity, :quantity_sold, :min_qty, :new_stock,
             numericality: { greater_than_or_equal_to: 0,
                             only_integer: true }
