@@ -17,6 +17,7 @@ module Admin
     end
 
     def create
+      # add this validation to the model error base
       if @item.validate_min_quantity?
         @item = @admin_user.items.create(item_params)
         if @item.save

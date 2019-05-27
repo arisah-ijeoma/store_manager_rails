@@ -4,7 +4,7 @@ class Item < ActiveRecord::Base
   belongs_to :admin_user
   has_many :transactions
 
-  validate :min_qty_is_less_than_quantity
+  validate :min_qty_is_not_zero
   validates :category, presence: true
   validates :name,
             uniqueness: { case_sensitive: false,
@@ -47,7 +47,11 @@ class Item < ActiveRecord::Base
 
   private
 
-  def min_qty_is_less_than_quantity
+  def min_qty_reached?
+    quantity <= min_qty
+  end
+
+  def min_qty_is_not_zero
     unless valid_values?
       errors.add(:min_qty, "should not be 0") if min_qty == 0
     end
