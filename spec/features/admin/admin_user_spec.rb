@@ -110,7 +110,6 @@ describe "Admin User Actions", type: :feature do
 
     def then_i_should_be_logged_in
       expect(page).to have_content('Yeko Yeko')
-      expect(page).to have_content('Cookie Bar')
     end
 
     def admin_can_update_employee

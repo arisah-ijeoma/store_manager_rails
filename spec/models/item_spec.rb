@@ -50,28 +50,12 @@ describe Item, type: :model do
     end
 
     describe 'duplicate item name' do
+      let(:admin) { create(:admin_user) }
+      let!(:item) { create(:item, admin_user: admin) }
+
       it 'raises an error' do
-        create(:item)
         expect{
-          create(:item, name: 'cassette')
-        }.to raise_error('Validation failed: Name This item already exists')
-      end
-    end
-
-    describe 'items without brands can not have the same name' do
-      it do
-        create(:item)
-        expect{
-          create(:valid_item_empty_brand)
-        }.to raise_error('Validation failed: Name This item already exists')
-      end
-    end
-
-    describe 'same brand same name' do
-      it do
-        create(:valid_item_name_case)
-        expect{
-          create(:valid_item_name_case)
+          create(:item, admin_user: admin, name: 'cassette')
         }.to raise_error('Validation failed: Name This item already exists')
       end
     end

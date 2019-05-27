@@ -4,6 +4,7 @@ FactoryBot.define do
     name { 'Cassette' }
     quantity { 3 }
     min_qty { 1 }
+    association(:admin_user)
 
     trait :name_case do
       name { 'my item name' }

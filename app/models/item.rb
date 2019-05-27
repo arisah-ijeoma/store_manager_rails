@@ -45,6 +45,10 @@ class Item < ActiveRecord::Base
     min_qty < quantity
   end
 
+  def send_min_qty_notice
+    MinQtyMailer.notice(admin_user, self).deliver_now if min_qty_reached?
+  end
+
   private
 
   def min_qty_reached?

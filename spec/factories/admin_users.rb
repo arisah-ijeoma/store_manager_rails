@@ -5,12 +5,11 @@ FactoryBot.define do
     last_name { 'Jay' }
     password { 'password' }
     role { 'regular' }
-    establishment { 'Cookie Bar' }
+    establishment { Faker::Company.unique.name }
 
     trait :super do
       password { 'superpass' }
       role { 'super' }
-      establishment { 'Karaoke Bar' }
     end
 
     factory :super_admin_user, traits: [:super]
