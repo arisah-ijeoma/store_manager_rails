@@ -3,6 +3,7 @@ require 'rails_helper'
 describe "Admin Item Actions", type: :feature do
   let(:admin_user1) { create(:admin_user) }
   let(:admin_user2) { create(:admin_user, establishment: 'Mount Everest') }
+  let(:email) { ActionMailer::Base.deliveries.last }
 
   before do
     given_i_visit_the_app
@@ -22,7 +23,7 @@ describe "Admin Item Actions", type: :feature do
     fill_in 'Quantity Sold', with: 2
     click_on 'Sold'
     expect(page).to have_content("You just sold 2 piece(s) of Mortal Kombat X")
-    expect(ActionMailer::Base.deliveries.count).to eq 1
+    expect(email.to).to eq([admin_user1.email]) # minimum quantity was hit
   end
 
   scenario "admin can not sell wrong quantity of item" do

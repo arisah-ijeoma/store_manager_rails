@@ -6,6 +6,7 @@ describe 'employee Item Actions', type: :feature do
   let(:user) { create(:user, admin_user: admin_user) }
   let(:user2) { create(:user, admin_user: admin_user) }
   let(:user3) { create(:user, admin_user: admin_user2) }
+  let(:email) { ActionMailer::Base.deliveries.last }
 
   before do
     # only admins can create items
@@ -27,6 +28,7 @@ describe 'employee Item Actions', type: :feature do
     fill_in 'Quantity Sold', with: 2
     click_on 'Sold'
     expect(page).to have_content("You just sold 2 piece(s) of Barbie Doll")
+    expect(email.to).to eq([admin_user.email]) # minimum quantity was hit
   end
 
   scenario "employee can not sell wrong quantity of item" do
@@ -59,7 +61,6 @@ describe 'employee Item Actions', type: :feature do
     fill_in 'Quantity Sold', with: 3
     click_on 'Sold'
     expect(page).to have_content("You just sold 3 piece(s) of Barbie Doll")
-    expect(ActionMailer::Base.deliveries.count).to eq 1
   end
 
   scenario "employee can not sell in negative" do
