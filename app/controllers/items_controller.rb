@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
 
       elsif @item.save
         Transaction.create(admin_user: @user.admin_user, user: @user, item: @item, quantity_sold: qty_sold)
-
+        MinQtyMailer.notice(@user.admin_user, @item).deliver_now if @item.min_qty_reached?
         redirect_to items_path,
                     notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"
       else

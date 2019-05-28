@@ -44,6 +44,7 @@ module Admin
           redirect_to admin_items_path, notice: "No sales made"
         elsif @item.save
           Transaction.create(admin_user: @admin_user, item: @item, quantity_sold: qty_sold)
+          MinQtyMailer.notice(@admin_user, @item).deliver_now if @item.min_qty_reached?
           redirect_to admin_items_path,
           notice: "You just sold #{qty_sold} piece(s) of #{@item.name}"
         else

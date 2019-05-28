@@ -64,17 +64,8 @@ describe Item, type: :model do
       let(:item) { create(:item, quantity: 1) }
 
       it do
-        expect(item.send(:min_qty_reached?)).to be true
+        expect(item.min_qty_reached?).to be true
       end
-    end
-  end
-
-  describe 'mailer' do
-    let(:item) { create(:item, quantity: 1) }
-
-    it 'sends an email when minimum quantity is reached' do
-      expect { item.send_min_qty_notice }
-        .to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
 end

@@ -22,6 +22,7 @@ describe "Admin Item Actions", type: :feature do
     fill_in 'Quantity Sold', with: 2
     click_on 'Sold'
     expect(page).to have_content("You just sold 2 piece(s) of Mortal Kombat X")
+    expect(ActionMailer::Base.deliveries.count).to eq 1
   end
 
   scenario "admin can not sell wrong quantity of item" do

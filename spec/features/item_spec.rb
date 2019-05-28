@@ -59,6 +59,7 @@ describe 'employee Item Actions', type: :feature do
     fill_in 'Quantity Sold', with: 3
     click_on 'Sold'
     expect(page).to have_content("You just sold 3 piece(s) of Barbie Doll")
+    expect(ActionMailer::Base.deliveries.count).to eq 1
   end
 
   scenario "employee can not sell in negative" do
